@@ -1,7 +1,0 @@
--r ../../../../py-dev-requirements.txt
-numpy
-pytest
-requests-mock
-twine
-coverage
-nbqa
