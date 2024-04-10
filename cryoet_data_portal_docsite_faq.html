@@ -354,6 +354,10 @@ I have the AWS CLI tool installed on a Mac computer. I copied the download comma
 <p>Descriptions of all terminology and metadata used in the Portal is provided <a class="reference external" href="https://chanzuckerberg.github.io/cryoet-data-portal/python-api.html">here</a>.</p>
 </details>
 <details>
+  <summary>Which annotations can I view with a tomogram?</summary>
+There is no definitive rule for which annotations are displayed by default. The annotations are manually chosen to display as many annotations as possible without overlap or occlusion. For example, when the cytoplasm is annotated as a whole, it would occlude other annotations included within, such as protein picks. When there is a ground truth and predicted annotation, the ground truth to be the annotation defualt. Authors contributing data can specify the desired default annotation using the `is_visualization_default` metadata field. 
+</details>
+<details>
   <summary>How do I contribute data to the Portal?</summary>
 <p>Thank you for considering submitting data to the Portal!</p>
 <p>Contributions can be raw data (tilt series and movie frames) + resulting tomograms, a new tomogram for existing raw data in the Portal generated using a different algorithm, and/or annotations of existing tomograms. We encourage all contributions, including those which may be of lower quality than existing datasets on the Portal, as these datasets are useful for developing better annotation and data processing algorithms.</p>
