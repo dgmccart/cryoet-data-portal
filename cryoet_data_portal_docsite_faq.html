@@ -136,10 +136,12 @@
                 
   <section id="frequently-asked-questions">
 <h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this heading">¶</a></h1>
-<p>We hope these answers will help you get the most out of the CryoET Data Portal! If you need additional information or assistance, you can reach us by submitting a <a class="reference external" href="https://github.com/chanzuckerberg/cryoet-data-portal/issues/new">Github Issue</a>. For help with submitting an issue, follow these instructions.</p>
+<p>We hope these answers will help you get the most out of the CryoET Data Portal!</p>
 <details open>
   <summary>How do I get help with using the Data Portal?</summary>
 <p>Did you encounter a bug, error, or other issue while using the portal? <a class="reference external" href="https://github.com/chanzuckerberg/cryoet-data-portal/issues">Submit an issue on Github</a> to let us know!</p>
+<details>
+  <summary>How do I submit an issue on Github?</summary>
 <p>To submit an issue, you’ll need to create a <a class="reference external" href="https://github.com/signup?ref_cta=Sign+up&amp;amp;ref_loc=header+logged+out&amp;amp;ref_page=%2F&amp;amp;source=header-home">free Github account</a>. This allows our team to follow up with you on Github if we have a question about the problem you encountered. Then, <a class="reference external" href="https://github.com/chanzuckerberg/cryoet-data-portal/issues/new">fill out this form</a>. We suggest you use a descriptive title, paste an error messages using the <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code> icon on the form, and provide as many details as possible about the problem, including what you expected to happen and what type of machine you were using.</p>
 <p>For more information about submiting issues on Github, please refer to <a class="reference external" href="https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue#creating-an-issue-from-a-repository">Github’s documentation</a>.</p>
 <section id="example-issue">
@@ -150,6 +152,7 @@ I have the AWS CLI tool installed on a Mac computer. I copied the download comma
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ERROR</span> <span class="n">MESSAGE</span> <span class="n">COPIED</span> <span class="n">FROM</span> <span class="n">TERMINAL</span>
 </pre></div>
 </div>
+</details> 
 </details>
 <details>
   <summary>What are datasets, runs, and annotations in the Data Portal?</summary>
@@ -272,7 +275,7 @@ I have the AWS CLI tool installed on a Mac computer. I copied the download comma
 </details>
 <details>
   <summary>Which annotations are displayed with a tomogram in Neuroglancer?</summary>
-There is no definitive rule for which annotations are displayed with a tomogram in Neuroglancer by default. The annotations are manually chosen to display as many annotations as possible without overlap or occlusion. For example, when the cytoplasm is annotated as a whole, it would occlude other annotations included within, such as protein picks. When there is a ground truth and predicted annotation, the ground truth annotation is displayed by default. Authors contributing data can specify the desired default annotations during the submission process.
+<p>There is no definitive rule for which annotations are displayed with a tomogram in Neuroglancer by default. The annotations are manually chosen to display as many annotations as possible without overlap or occlusion. For example, when the cytoplasm is annotated as a whole, it would occlude other annotations included within, such as protein picks. When there is a ground truth and predicted annotation, the ground truth annotation is displayed by default. Authors contributing data can specify the desired default annotations during the submission process.</p>
 <p>The CryoET Data Portal napari plugin can be used to visualize tomograms, annotations, and metadata. Refer to <a class="reference external" href="https://github.com/chanzuckerberg/napari-cryoet-data-portal#usage">this documentation</a> to learn about how to use the plugin and to <a class="reference external" href="https://chanzuckerberg.github.io/cryoet-data-portal/cryoet_data_portal_docsite_napari.html">this page</a> to learn more about napari and CryoET Data Portal.</p>
 </details>
 <details>
