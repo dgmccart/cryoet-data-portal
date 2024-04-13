@@ -93,10 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cryoet_data_portal_docsite_napari.html">napari</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cryoet_data_portal_docsite_examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cryoet_data_portal_docsite_aws.html">Download Data using AWS CLI</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Frequently Asked Questions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#example-issue">Example Issue</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Frequently Asked Questions</a></li>
 </ul>
 
                 
@@ -136,36 +133,35 @@
                 
   <section id="frequently-asked-questions">
 <h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this heading">¶</a></h1>
-<p>We hope these answers will help you get the most out of the CryoET Data Portal!</p>
+<p>We hope these answers will help you get the most out of the CryoET Data Portal! Testing link</p>
 <details open>
-  <summary>How do I get help with using the Data Portal?</summary>
+<summary>How do I get help with using the Data Portal?</summary>
 <p>Did you encounter a bug, error, or other issue while using the portal? <a class="reference external" href="https://github.com/chanzuckerberg/cryoet-data-portal/issues">Submit an issue on Github</a> to let us know!</p>
 <details>
-  <summary>How do I submit an issue on Github?</summary>
+<summary>How do I submit an issue on Github?</summary>
 <p>To submit an issue, you’ll need to create a <a class="reference external" href="https://github.com/signup?ref_cta=Sign+up&amp;amp;ref_loc=header+logged+out&amp;amp;ref_page=%2F&amp;amp;source=header-home">free Github account</a>. This allows our team to follow up with you on Github if we have a question about the problem you encountered. Then, <a class="reference external" href="https://github.com/chanzuckerberg/cryoet-data-portal/issues/new">fill out this form</a>. We suggest you use a descriptive title, paste an error messages using the <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code> icon on the form, and provide as many details as possible about the problem, including what you expected to happen and what type of machine you were using.</p>
 <p>For more information about submiting issues on Github, please refer to <a class="reference external" href="https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue#creating-an-issue-from-a-repository">Github’s documentation</a>.</p>
-<section id="example-issue">
-<h2>Example Issue<a class="headerlink" href="#example-issue" title="Permalink to this heading">¶</a></h2>
+<p>Example Issue</p>
 <p>Title: Tomogram TS_026 cannot be downloaded</p>
 <p>Body:
 I have the AWS CLI tool installed on a Mac computer. I copied the download command from the prompt on the tomogram page. Instead of downloading, I received this error message:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ERROR</span> <span class="n">MESSAGE</span> <span class="n">COPIED</span> <span class="n">FROM</span> <span class="n">TERMINAL</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ERROR</span> <span class="n">MESSAGE</span>
 </pre></div>
 </div>
-</details> 
+</details>
 </details>
 <details>
-  <summary>What are datasets, runs, and annotations in the Data Portal?</summary>
+<summary>What are datasets, runs, and annotations in the Data Portal?</summary>
 <p>The CryoET Data Portal uses the following data schema:</p>
 <ol class="arabic simple">
 <li><p>A dataset is a community contributed set of image files for tilt series, reconstructed tomograms, and if available, cellular and/or subcellular annotation files. Every dataset contains only one sample type prepared and imaged with the same conditions. The dataset title, such as <code class="docutils literal notranslate"><span class="pre">S.</span> <span class="pre">pombe</span> <span class="pre">cryo-FIB</span> <span class="pre">lamellae</span> <span class="pre">acquired</span> <span class="pre">with</span> <span class="pre">defocus-only</span></code>, summarizes these conditions. Samples can be a cell, tissue or organism; intact organelle; in-vitro mixture of macromolecules or their complex; or in-silico synthetic data, where the experimental conditions are kept constant. Downloading a dataset downloads all files, including all available tilt series, tomograms, and annotations.</p></li>
 <li><p>A run is one experiment, or replicate, associated with a dataset, where all runs in a dataset have the same sample and imaging conditions. Every run contains a collection of all tomography data and annotations related to imaging one physical location in a sample. It typically contains one tilt series and all associated data (e.g. movie frames, tilt series image stack, tomograms, annotations, and metadata), but in some cases, it may be a set of tilt series that form a mosaic. When downloading a run from a Portal page, you may choose to download the tomogram or all available annotations. To download all data associated with a run (i.e. all available movie frames, tilt series image stack, tomograms, annotations, and associated metadata), please refer to the API download guide.</p></li>
 <li><p>An annotation is a point or segmentation indicating the location of a macromolecular complex in the tomogram. On the run page, you may choose to download tomograms with their annotations.</p></li>
 </ol>
-<p>Descriptions of all terminology and metadata used in the Portal is provided [here](#ADD LINK WHEN FINALIZED). You can refer to a graphic of the <a class="reference external" href="https://chanzuckerberg.github.io/cryoet-data-portal/python-api.html#data-model">data schema here</a>.</p>
+<p>You can refer to a graphic of the <a class="reference external" href="https://chanzuckerberg.github.io/cryoet-data-portal/python-api.html#data-model">data schema here</a>.</p>
 </details>
 <details>
-  <summary>How do I download data using Amazon Web Services (AWS)?</summary>
+<summary>How do I download data using Amazon Web Services (AWS)?</summary>
 <p><strong>The Data Portal’s S3 bucket is public</strong>, so it can be used without sign-in credentials by specifying <code class="docutils literal notranslate"><span class="pre">--no-sign-request</span></code> in your commands and you get started downloading data in only a few minutes.</p>
 <ol class="arabic simple">
 <li><p>Download the installer: <a class="reference external" href="https://awscli.amazonaws.com/AWSCLIV2.pkg">MacOS Installer Download</a> / <a class="reference external" href="https://awscli.amazonaws.com/AWSCLIV2.msi">Windows Installer Download</a></p></li>
@@ -184,15 +180,15 @@ I have the AWS CLI tool installed on a Mac computer. I copied the download comma
 <p>In the above example, the download happened very quickly because the file was only about 1 kB in size. However, typical tomograms are multiple GB, so expect downloading to take 30-60 mins for a single tomogram for a given run, but downloading could take as long as days depending on the number and sizes of the files. To speed up download, you can follow <a class="reference internal" href="cryoet_data_portal_docsite_aws.html"><span class="std std-doc">these instructions to optimize download speed</span></a>.</p>
 </details>
 <details>
-  <summary>How do I use Neuroglancer to visualize tomograms with their annotations?</summary>
+<summary>How do I use Neuroglancer to visualize tomograms with their annotations?</summary>
 <p>All tomograms in the Data Portal are viewable in Neuroglancer along with their annotations. You can open a tomogram in Neuroglancer by clicking the blue <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Tomogram</span></code> button on any run page in the Portal. This will open an instance of Neuroglancer in a separate tab of your browser with the selected data along with their annotations already loaded. For more information about visualizing data with Neuroglancer, check out the documentation from Connectomics, the team that develops Neuroglancer, <a class="reference external" href="https://connectomics.readthedocs.io/en/latest/external/neuroglancer.html#basic-usage">here</a>.</p>
 </details>
 <details>
-  <summary>How do I use napari to visualize tomograms with their annotations?</summary>
+<summary>How do I use napari to visualize tomograms with their annotations?</summary>
 <p>The CryoET Data Portal napari plugin can be used to visualize tomograms, annotations, and metadata. Refer to <a class="reference external" href="https://github.com/chanzuckerberg/napari-cryoet-data-portal#usage">this documentation</a> to learn about how to use the plugin and to <a class="reference external" href="https://chanzuckerberg.github.io/cryoet-data-portal/cryoet_data_portal_docsite_napari.html">this page</a> to learn more about napari and CryoET Data Portal.</p>
 </details>
 <details>
-  <summary>How do I download data using the Portal's API?</summary>
+<summary>How do I download data using the Portal's API?</summary>
 <ul class="simple">
 <li><p>The <Class><code class="docutils literal notranslate"><span class="pre">Dataset</span></code></Class>, <Class><code class="docutils literal notranslate"><span class="pre">Run</span></code></Class>, and <Class><code class="docutils literal notranslate"><span class="pre">TomogramVoxelSpacing</span></code></Class> classes have <Function><code class="docutils literal notranslate"><span class="pre">download_everything</span></code></Function> methods which allow you to download all data associated with one of those objects.</p></li>
 <li><p>The <Class><code class="docutils literal notranslate"><span class="pre">Tomogram</span></code></Class> class has <Function><code class="docutils literal notranslate"><span class="pre">download_mrcfile</span></code></Function> and <Function><code class="docutils literal notranslate"><span class="pre">download_omezarr</span></code></Function> methods to download the tomogram as a MRC or OME-Zarr file, respectively.</p></li>
@@ -212,7 +208,7 @@ I have the AWS CLI tool installed on a Mac computer. I copied the download comma
 <p>For more examples of downloading data with the API, check out the <a class="reference external" href="https://chanzuckerberg.github.io/cryoet-data-portal/cryoet_data_portal_docsite_quick_start.html#python-quick-start">tutorial here</a>. The Data Portal API reference can be found <a class="reference external" href="https://chanzuckerberg.github.io/cryoet-data-portal/python-api.html">here</a>.</p>
 </details>
 <details>
-  <summary>How do I use the Portal's API to select data?</summary>
+<summary>How do I use the Portal's API to select data?</summary>
 <p>Every class in the Data Portal API has a <Function><code class="docutils literal notranslate"><span class="pre">find</span></code></Function> method which can be used to select all objects that match criteria provided in a query. The <Function><code class="docutils literal notranslate"><span class="pre">find</span></code></Function> method utilizes python comparison operators <Op><code class="docutils literal notranslate"><span class="pre">==</span></code></Op>, <Op><code class="docutils literal notranslate"><span class="pre">!=</span></code></Op>, <Op><code class="docutils literal notranslate"><span class="pre">&gt;</span></code></Op>, <Op><code class="docutils literal notranslate"><span class="pre">&gt;=</span></code></Op>, <Op><code class="docutils literal notranslate"><span class="pre">&lt;</span></code></Op>, <Op><code class="docutils literal notranslate"><span class="pre">&lt;=</span></code></Op>, as well as <Function><code class="docutils literal notranslate"><span class="pre">like</span></code></Function>, <Function><code class="docutils literal notranslate"><span class="pre">ilike</span></code></Function>, and <Function><code class="docutils literal notranslate"><span class="pre">_in</span></code></Function> methods used to search for strings that match a given pattern, to create queries.</p>
 <ul class="simple">
 <li><p><Function><code class="docutils literal notranslate"><span class="pre">like</span></code></Function> is a partial match, with the % character being a wildcard</p></li>
@@ -229,13 +225,13 @@ I have the AWS CLI tool installed on a Mac computer. I copied the download comma
 <span class="n">runs_list</span> <span class="o">=</span> <span class="n">Run</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">query_filters</span><span class="o">=</span><span class="p">[</span><span class="n">Run</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="s2">&quot;%TS%&quot;</span><span class="p">),</span> <span class="n">Run</span><span class="o">.</span><span class="n">tomogram_voxel_spacings</span><span class="o">.</span><span class="n">tomograms</span><span class="o">.</span><span class="n">size_x</span> <span class="o">&gt;</span> <span class="mi">900</span><span class="p">])</span>
 
 <span class="k">for</span> <span class="n">run</span> <span class="ow">in</span> <span class="n">runs_list</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">run</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">run</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>For more examples of using the <Function><code class="docutils literal notranslate"><span class="pre">find</span></code></Function> operator, check out the <a class="reference external" href="https://chanzuckerberg.github.io/cryoet-data-portal/cryoet_data_portal_docsite_quick_start.html#python-quick-start">tutorial here</a>. The Data Portal API reference can be found <a class="reference external" href="https://chanzuckerberg.github.io/cryoet-data-portal/python-api.html">here</a>.</p>
 </details>
 <details>
-  <summary>What is the meaning of the tilt series quality score?</summary>
+<summary>What is the meaning of the tilt series quality score?</summary>
 <p>The tilt series quality score/rating is a relative subjective scale meant for comparing tilt series within a dataset. The contributor of the dataset assigns quality scores to each of the tilt series to communicate their quality estimate to users. Below is an example scale based mainly on alignability and usefulness for the intended analysis.</p>
 <table class="docutils align-default">
 <thead>
@@ -269,24 +265,22 @@ I have the AWS CLI tool installed on a Mac computer. I copied the download comma
 </table>
 </details>
 <details>
-  <summary>What is the dataset identifier and Portal ID?</summary>
+<summary>What is the dataset identifier and Portal ID?</summary>
 <p>The dataset identifier in the API refers to the Portal ID provided in the Portal. This number is assigned by the Data Portal as a unique identifier for a dataset and is used as the directory name in the data filetree.</p>
 <p>Descriptions of all terminology and metadata used in the Portal is provided <a class="reference external" href="https://chanzuckerberg.github.io/cryoet-data-portal/python-api.html">here</a>.</p>
 </details>
 <details>
-  <summary>Which annotations are displayed with a tomogram in Neuroglancer?</summary>
+<summary><a id="Which annotations are displayed with a tomogram in Neuroglancer?"></a>Which annotations are displayed with a tomogram in Neuroglancer?</summary>
 <p>There is no definitive rule for which annotations are displayed with a tomogram in Neuroglancer by default. The annotations are manually chosen to display as many annotations as possible without overlap or occlusion. For example, when the cytoplasm is annotated as a whole, it would occlude other annotations included within, such as protein picks. When there is a ground truth and predicted annotation, the ground truth annotation is displayed by default. Authors contributing data can specify the desired default annotations during the submission process.</p>
 <p>The CryoET Data Portal napari plugin can be used to visualize tomograms, annotations, and metadata. Refer to <a class="reference external" href="https://github.com/chanzuckerberg/napari-cryoet-data-portal#usage">this documentation</a> to learn about how to use the plugin and to <a class="reference external" href="https://chanzuckerberg.github.io/cryoet-data-portal/cryoet_data_portal_docsite_napari.html">this page</a> to learn more about napari and CryoET Data Portal.</p>
 </details>
 <details>
-  <summary>How do I contribute data to the Portal?</summary>
+<summary>How do I contribute data to the Portal?</summary>
 <p>Thank you for considering submitting data to the Portal!</p>
 <p>Contributions can be raw data (tilt series and movie frames) + resulting tomograms, a new tomogram for existing raw data in the Portal generated using a different algorithm, and/or annotations of existing tomograms. We encourage all contributions, including those which may be of lower quality than existing datasets on the Portal, as these datasets are useful for developing better annotation and data processing algorithms.</p>
 <p>We will work with you to upload the data to the Portal. Please fill out <a class="reference external" href="https://airtable.com/apppmytRJXoXYTO9w/shr5UxgeQcUTSGyiY?prefill_Event=Contribution+from+portal&amp;amp;hide_Event=true">this contribution form</a>, which is also found through the <code class="docutils literal notranslate"><span class="pre">Tell</span> <span class="pre">Us</span> <span class="pre">More</span></code> button on the bottom of the Portal homepage. We will then reach out to you to start the process of uploading your data. We have a ~6 month release cycle, so please allow time for the data to become available through the portal.</p>
 <p>In the future, we plan to implement a self-upload process so that users can add their data to the Portal on their own.</p>
 </details>
-</Accordion>
-</section>
 </section>
 
 
