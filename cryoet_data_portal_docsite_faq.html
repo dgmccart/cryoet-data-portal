@@ -135,7 +135,7 @@
 <h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this heading">¶</a></h1>
 <p>We hope these answers will help you get the most out of the CryoET Data Portal!</p>
 <details open>
-<summary><h3>How do I get help with using the Data Portal?</h3></summary>
+<summary><h5>How do I get help with using the Data Portal?</h5></summary>
 <p>Did you encounter a bug, error, or other issue while using the portal? <a class="reference external" href="https://github.com/chanzuckerberg/cryoet-data-portal/issues">Submit an issue on Github</a> to let us know!</p>
 <details>
 <summary>How do I submit an issue on Github?</summary>
@@ -151,7 +151,7 @@ I have the AWS CLI tool installed on a Mac computer. I copied the download comma
 </details>
 </details>
 <details>
-<summary><h3>What are datasets, runs, and annotations in the Data Portal?</h3></summary>
+<summary><h5>What are datasets, runs, and annotations in the Data Portal?</h5></summary>
 <p>The CryoET Data Portal uses the following data schema:</p>
 <ol class="arabic simple">
 <li><p>A dataset is a community contributed set of image files for tilt series, reconstructed tomograms, and if available, cellular and/or subcellular annotation files. Every dataset contains only one sample type prepared and imaged with the same conditions. The dataset title, such as <code class="docutils literal notranslate"><span class="pre">S.</span> <span class="pre">pombe</span> <span class="pre">cryo-FIB</span> <span class="pre">lamellae</span> <span class="pre">acquired</span> <span class="pre">with</span> <span class="pre">defocus-only</span></code>, summarizes these conditions. Samples can be a cell, tissue or organism; intact organelle; in-vitro mixture of macromolecules or their complex; or in-silico synthetic data, where the experimental conditions are kept constant. Downloading a dataset downloads all files, including all available tilt series, tomograms, and annotations.</p></li>
@@ -161,7 +161,7 @@ I have the AWS CLI tool installed on a Mac computer. I copied the download comma
 <p>You can refer to a graphic of the <a class="reference external" href="https://chanzuckerberg.github.io/cryoet-data-portal/python-api.html#data-model">data schema here</a>.</p>
 </details>
 <details>
-<summary><h4>How do I download data using Amazon Web Services (AWS)?</h4></summary>
+<summary><h5>How do I download data using Amazon Web Services (AWS)?</h5></summary>
 <p><strong>The Data Portal’s S3 bucket is public</strong>, so it can be used without sign-in credentials by specifying <code class="docutils literal notranslate"><span class="pre">--no-sign-request</span></code> in your commands and you get started downloading data in only a few minutes.</p>
 <ol class="arabic simple">
 <li><p>Download the installer: <a class="reference external" href="https://awscli.amazonaws.com/AWSCLIV2.pkg">MacOS Installer Download</a> / <a class="reference external" href="https://awscli.amazonaws.com/AWSCLIV2.msi">Windows Installer Download</a></p></li>
@@ -180,7 +180,7 @@ I have the AWS CLI tool installed on a Mac computer. I copied the download comma
 <p>In the above example, the download happened very quickly because the file was only about 1 kB in size. However, typical tomograms are multiple GB, so expect downloading to take 30-60 mins for a single tomogram for a given run, but downloading could take as long as days depending on the number and sizes of the files. To speed up download, you can follow <a class="reference internal" href="cryoet_data_portal_docsite_aws.html"><span class="std std-doc">these instructions to optimize download speed</span></a>.</p>
 </details>
 <details>
-<summary><h4>How do I use Neuroglancer to visualize tomograms with their annotations?</h4></summary>
+<summary><h5>How do I use Neuroglancer to visualize tomograms with their annotations?</h5></summary>
 <p>All tomograms in the Data Portal are viewable in Neuroglancer along with their annotations. You can open a tomogram in Neuroglancer by clicking the blue <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Tomogram</span></code> button on any run page in the Portal. This will open an instance of Neuroglancer in a separate tab of your browser with the selected data along with their annotations already loaded. For more information about visualizing data with Neuroglancer, check out the documentation from Connectomics, the team that develops Neuroglancer, <a class="reference external" href="https://connectomics.readthedocs.io/en/latest/external/neuroglancer.html#basic-usage">here</a>.</p>
 </details>
 <details>
