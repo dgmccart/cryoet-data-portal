@@ -184,11 +184,11 @@ I have the AWS CLI tool installed on a Mac computer. I copied the download comma
 <p>All tomograms in the Data Portal are viewable in Neuroglancer along with their annotations. You can open a tomogram in Neuroglancer by clicking the blue <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Tomogram</span></code> button on any run page in the Portal. This will open an instance of Neuroglancer in a separate tab of your browser with the selected data along with their annotations already loaded. For more information about visualizing data with Neuroglancer, check out the documentation from Connectomics, the team that develops Neuroglancer, <a class="reference external" href="https://connectomics.readthedocs.io/en/latest/external/neuroglancer.html#basic-usage">here</a>.</p>
 </details>
 <details>
-<summary>How do I use napari to visualize tomograms with their annotations?</summary>
+<summary><h5>How do I use napari to visualize tomograms with their annotations?</h5></summary>
 <p>The CryoET Data Portal napari plugin can be used to visualize tomograms, annotations, and metadata. Refer to <a class="reference external" href="https://github.com/chanzuckerberg/napari-cryoet-data-portal#usage">this documentation</a> to learn about how to use the plugin and to <a class="reference external" href="https://chanzuckerberg.github.io/cryoet-data-portal/cryoet_data_portal_docsite_napari.html">this page</a> to learn more about napari and CryoET Data Portal.</p>
 </details>
 <details>
-<summary>How do I download data using the Portal's API?</summary>
+<summary><h5>How do I download data using the Portal's API?</h5></summary>
 <ul class="simple">
 <li><p>The <Class><code class="docutils literal notranslate"><span class="pre">Dataset</span></code></Class>, <Class><code class="docutils literal notranslate"><span class="pre">Run</span></code></Class>, and <Class><code class="docutils literal notranslate"><span class="pre">TomogramVoxelSpacing</span></code></Class> classes have <Function><code class="docutils literal notranslate"><span class="pre">download_everything</span></code></Function> methods which allow you to download all data associated with one of those objects.</p></li>
 <li><p>The <Class><code class="docutils literal notranslate"><span class="pre">Tomogram</span></code></Class> class has <Function><code class="docutils literal notranslate"><span class="pre">download_mrcfile</span></code></Function> and <Function><code class="docutils literal notranslate"><span class="pre">download_omezarr</span></code></Function> methods to download the tomogram as a MRC or OME-Zarr file, respectively.</p></li>
@@ -208,7 +208,7 @@ I have the AWS CLI tool installed on a Mac computer. I copied the download comma
 <p>For more examples of downloading data with the API, check out the <a class="reference external" href="https://chanzuckerberg.github.io/cryoet-data-portal/cryoet_data_portal_docsite_quick_start.html#python-quick-start">tutorial here</a>. The Data Portal API reference can be found <a class="reference external" href="https://chanzuckerberg.github.io/cryoet-data-portal/python-api.html">here</a>.</p>
 </details>
 <details>
-<summary>How do I use the Portal's API to select data?</summary>
+<summary><h5>How do I use the Portal's API to select data?</h5></summary>
 <p>Every class in the Data Portal API has a <Function><code class="docutils literal notranslate"><span class="pre">find</span></code></Function> method which can be used to select all objects that match criteria provided in a query. The <Function><code class="docutils literal notranslate"><span class="pre">find</span></code></Function> method utilizes python comparison operators <Op><code class="docutils literal notranslate"><span class="pre">==</span></code></Op>, <Op><code class="docutils literal notranslate"><span class="pre">!=</span></code></Op>, <Op><code class="docutils literal notranslate"><span class="pre">&gt;</span></code></Op>, <Op><code class="docutils literal notranslate"><span class="pre">&gt;=</span></code></Op>, <Op><code class="docutils literal notranslate"><span class="pre">&lt;</span></code></Op>, <Op><code class="docutils literal notranslate"><span class="pre">&lt;=</span></code></Op>, as well as <Function><code class="docutils literal notranslate"><span class="pre">like</span></code></Function>, <Function><code class="docutils literal notranslate"><span class="pre">ilike</span></code></Function>, and <Function><code class="docutils literal notranslate"><span class="pre">_in</span></code></Function> methods used to search for strings that match a given pattern, to create queries.</p>
 <ul class="simple">
 <li><p><Function><code class="docutils literal notranslate"><span class="pre">like</span></code></Function> is a partial match, with the % character being a wildcard</p></li>
@@ -231,7 +231,7 @@ I have the AWS CLI tool installed on a Mac computer. I copied the download comma
 <p>For more examples of using the <Function><code class="docutils literal notranslate"><span class="pre">find</span></code></Function> operator, check out the <a class="reference external" href="https://chanzuckerberg.github.io/cryoet-data-portal/cryoet_data_portal_docsite_quick_start.html#python-quick-start">tutorial here</a>. The Data Portal API reference can be found <a class="reference external" href="https://chanzuckerberg.github.io/cryoet-data-portal/python-api.html">here</a>.</p>
 </details>
 <details>
-<summary>What is the meaning of the tilt series quality score?</summary>
+<summary><h5>What is the meaning of the tilt series quality score?</h5></summary>
 <p>The tilt series quality score/rating is a relative subjective scale meant for comparing tilt series within a dataset. The contributor of the dataset assigns quality scores to each of the tilt series to communicate their quality estimate to users. Below is an example scale based mainly on alignability and usefulness for the intended analysis.</p>
 <table class="docutils align-default">
 <thead>
@@ -265,17 +265,17 @@ I have the AWS CLI tool installed on a Mac computer. I copied the download comma
 </table>
 </details>
 <details>
-<summary>What is the dataset identifier and Portal ID?</summary>
+<summary><h5>What is the dataset identifier and Portal ID?</h5></summary>
 <p>The dataset identifier in the API refers to the Portal ID provided in the Portal. This number is assigned by the Data Portal as a unique identifier for a dataset and is used as the directory name in the data filetree.</p>
 <p>Descriptions of all terminology and metadata used in the Portal is provided <a class="reference external" href="https://chanzuckerberg.github.io/cryoet-data-portal/python-api.html">here</a>.</p>
 </details>
 <details>
-<summary><a id="annotations"></a>Which annotations are displayed with a tomogram in Neuroglancer?</summary>
+<summary><h5>Which annotations are displayed with a tomogram in Neuroglancer?</h5></summary>
 <p>There is no definitive rule for which annotations are displayed with a tomogram in Neuroglancer by default. The annotations are manually chosen to display as many annotations as possible without overlap or occlusion. For example, when the cytoplasm is annotated as a whole, it would occlude other annotations included within, such as protein picks. When there is a ground truth and predicted annotation, the ground truth annotation is displayed by default. Authors contributing data can specify the desired default annotations during the submission process.</p>
 <p>The CryoET Data Portal napari plugin can be used to visualize tomograms, annotations, and metadata. Refer to <a class="reference external" href="https://github.com/chanzuckerberg/napari-cryoet-data-portal#usage">this documentation</a> to learn about how to use the plugin and to <a class="reference external" href="https://chanzuckerberg.github.io/cryoet-data-portal/cryoet_data_portal_docsite_napari.html">this page</a> to learn more about napari and CryoET Data Portal.</p>
 </details>
 <details>
-<summary>How do I contribute data to the Portal?</summary>
+<summary><h5>How do I contribute data to the Portal?</h5></summary>
 <p>Thank you for considering submitting data to the Portal!</p>
 <p>Contributions can be raw data (tilt series and movie frames) + resulting tomograms, a new tomogram for existing raw data in the Portal generated using a different algorithm, and/or annotations of existing tomograms. We encourage all contributions, including those which may be of lower quality than existing datasets on the Portal, as these datasets are useful for developing better annotation and data processing algorithms.</p>
 <p>We will work with you to upload the data to the Portal. Please fill out <a class="reference external" href="https://airtable.com/apppmytRJXoXYTO9w/shr5UxgeQcUTSGyiY?prefill_Event=Contribution+from+portal&amp;amp;hide_Event=true">this contribution form</a>, which is also found through the <code class="docutils literal notranslate"><span class="pre">Tell</span> <span class="pre">Us</span> <span class="pre">More</span></code> button on the bottom of the Portal homepage. We will then reach out to you to start the process of uploading your data. We have a ~6 month release cycle, so please allow time for the data to become available through the portal.</p>
