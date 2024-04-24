@@ -133,21 +133,14 @@
                 
   <section id="frequently-asked-questions">
 <h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this heading">¶</a></h1>
-<p>We hope these answers will help you get the most out of the CryoET Data Portal! Testing link</p>
+<p>We hope these answers will help you get the most out of the CryoET Data Portal!</p>
 <details open>
 <summary><h5>How do I get help with using the Data Portal?</h5></summary>
-<p>Did you encounter a bug, error, or other issue while using the portal? <a class="reference external" href="https://github.com/chanzuckerberg/cryoet-data-portal/issues">Submit an issue on Github</a> to let us know!</p>
+<p>Did you encounter a bug, error, or other issue while using the portal? <a class="reference external" href="https://github.com/chanzuckerberg/cryoet-data-portal/issues/new?assignees=&amp;amp;labels=bug&amp;amp;projects=&amp;amp;template=bug.md&amp;amp;title=">Submit an issue on Github</a> to let us know!</p>
 <details>
 <summary>How do I submit an issue on Github?</summary>
-<p>To submit an issue, you’ll need to create a <a class="reference external" href="https://github.com/signup?ref_cta=Sign+up&amp;amp;ref_loc=header+logged+out&amp;amp;ref_page=%2F&amp;amp;source=header-home">free Github account</a>. This allows our team to follow up with you on Github if we have a question about the problem you encountered. Then, <a class="reference external" href="https://github.com/chanzuckerberg/cryoet-data-portal/issues/new">fill out this form</a>. We suggest you use a descriptive title, paste an error messages using the <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code> icon on the form, and provide as many details as possible about the problem, including what you expected to happen and what type of machine you were using.</p>
+<p>To submit an issue, you’ll need to create a <a class="reference external" href="https://github.com/signup?ref_cta=Sign+up&amp;amp;ref_loc=header+logged+out&amp;amp;ref_page=%2F&amp;amp;source=header-home">free Github account</a>. This allows our team to follow up with you on Github if we have a question about the problem you encountered. Then, <a class="reference external" href="https://github.com/chanzuckerberg/cryoet-data-portal/issues/new?assignees=&amp;amp;labels=bug&amp;amp;projects=&amp;amp;template=bug.md&amp;amp;title=">fill out this form</a>. We suggest you use a descriptive title, paste an error messages using the <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code> icon on the form, and provide as many details as possible about the problem, including what you expected to happen and what type of machine you were using.</p>
 <p>For more information about submiting issues on Github, please refer to <a class="reference external" href="https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue#creating-an-issue-from-a-repository">Github’s documentation</a>.</p>
-<p>Example Issue</p>
-<p>Title: Tomogram TS_026 cannot be downloaded</p>
-<p>Body:
-I have the AWS CLI tool installed on a Mac computer. I copied the download command from the prompt on the tomogram page. Instead of downloading, I received this error message:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ERROR</span> <span class="n">MESSAGE</span>
-</pre></div>
-</div>
 </details>
 </details>
 <details>
@@ -162,22 +155,27 @@ I have the AWS CLI tool installed on a Mac computer. I copied the download comma
 </details>
 <details>
 <summary><h5>How do I download data using Amazon Web Services (AWS)?</h5></summary>
-<p><strong>The Data Portal’s S3 bucket is public</strong>, so it can be used without sign-in credentials by specifying <code class="docutils literal notranslate"><span class="pre">--no-sign-request</span></code> in your commands and you get started downloading data in only a few minutes.</p>
+<p><strong>The Data Portal’s S3 bucket is public</strong>, so it can be accessed without creating an account with AWS, simply add <code class="docutils literal notranslate"><span class="pre">--no-sign-request</span></code> in your commands as shown below. Using the instructions below, you can get started downloading data in only a few minutes. For more detailed instructions, please refer to the documentation <a class="reference internal" href="cryoet_data_portal_docsite_aws.html"><span class="std std-doc">here</span></a>.</p>
 <ol class="arabic simple">
 <li><p>Download the installer: <a class="reference external" href="https://awscli.amazonaws.com/AWSCLIV2.pkg">MacOS Installer Download</a> / <a class="reference external" href="https://awscli.amazonaws.com/AWSCLIV2.msi">Windows Installer Download</a></p></li>
-<li><p>Open installer and complete installation following the prompts. (No further steps, since credentials ARE NOT needed to use the tool.)</p></li>
+<li><p>Open the installer and complete installation following the prompts. (No further steps, since sign-in credentials ARE NOT needed to use the tool.)</p></li>
 <li><p>Open terminal (MacOS) or command prompt (Windows).</p></li>
 <li><p>Copy and paste the command from the download prompt for the desired data into terminal / command prompt and hit enter.</p></li>
 <li><p>Alternatively, create a custom command inserting the S3 URL of the data and the desired download destination in the spaces provided.</p></li>
 </ol>
+<p>To download a single file, use <code class="docutils literal notranslate"><span class="pre">cp</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aws</span> <span class="n">s3</span> <span class="n">cp</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">sign</span><span class="o">-</span><span class="n">request</span> <span class="p">[</span><span class="n">S3</span> <span class="n">bucket</span> <span class="n">URL</span><span class="p">]</span> <span class="p">[</span><span class="n">Local</span> <span class="n">destination</span> <span class="n">path</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>To download multiple files, use <code class="docutils literal notranslate"><span class="pre">sync</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aws</span> <span class="n">s3</span> <span class="n">sync</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">sign</span><span class="o">-</span><span class="n">request</span> <span class="p">[</span><span class="n">S3</span> <span class="n">bucket</span> <span class="n">URL</span><span class="p">]</span> <span class="p">[</span><span class="n">Local</span> <span class="n">destination</span> <span class="n">path</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>For example, to download a particular JSON file of tomogram metadata into a folder called “Downloads” use:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aws</span> <span class="n">s3</span> <span class="n">cp</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">sign</span><span class="o">-</span><span class="n">request</span> <span class="n">s3</span><span class="p">:</span><span class="o">//</span><span class="n">cryoet</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">portal</span><span class="o">-</span><span class="n">public</span><span class="o">/</span><span class="mi">10000</span><span class="o">/</span><span class="n">TS_026</span><span class="o">/</span><span class="n">Tomograms</span><span class="o">/</span><span class="n">VoxelSpacing13</span><span class="mf">.48</span><span class="o">/</span><span class="n">CanonicalTomogram</span><span class="o">/</span><span class="n">tomogram_metadata</span><span class="o">.</span><span class="n">json</span> <span class="o">~/</span><span class="n">Downloads</span><span class="o">/</span>
 </pre></div>
 </div>
-<p>In the above example, the download happened very quickly because the file was only about 1 kB in size. However, typical tomograms are multiple GB, so expect downloading to take 30-60 mins for a single tomogram for a given run, but downloading could take as long as days depending on the number and sizes of the files. To speed up download, you can follow <a class="reference internal" href="cryoet_data_portal_docsite_aws.html"><span class="std std-doc">these instructions to optimize download speed</span></a>.</p>
+<p>In the above example, the download happened very quickly because the file was only about 1 kB in size. However, typical tomograms are multiple GB, so expect downloading to take 30-60 mins for a single tomogram for a given run, but downloading could take as long as days depending on the number and sizes of the files. To speed up download, you can follow <a class="reference external" href="https://chanzuckerberg.github.io/cryoet-data-portal/cryoet_data_portal_docsite_aws.html#optimize-download-speed">these instructions to optimize download speed</a></p>
 </details>
 <details>
 <summary><h5>How do I use Neuroglancer to visualize tomograms with their annotations?</h5></summary>
