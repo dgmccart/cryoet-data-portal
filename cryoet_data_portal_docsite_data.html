@@ -4,10 +4,11 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Search &mdash; cryoet-data-portal  documentation</title>
+  <title>Data Schema &mdash; cryoet-data-portal  documentation</title>
   
 
   
@@ -29,7 +30,6 @@
   
 
   
-    
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -45,10 +45,10 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-    <script src="_static/searchtools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="#" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="napari" href="cryoet_data_portal_docsite_napari.html" />
+    <link rel="prev" title="Python API" href="python-api.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,10 +88,13 @@
                 
                 
                 
-                <ul>
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="cryoet_data_portal_docsite_quick_start.html">Quick start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python-api.html">Python API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cryoet_data_portal_docsite_data.html">Data Schema</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Schema</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quickstart">Quickstart</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="cryoet_data_portal_docsite_napari.html">napari</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cryoet_data_portal_docsite_examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cryoet_data_portal_docsite_aws.html">Download Data using AWS CLI</a></li>
@@ -123,8 +126,9 @@
             <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Search</li>
+      <li class="breadcrumb-item active">Data Schema</li>
       <li class="wy-breadcrumbs-aside">
+            <a href="_sources/cryoet_data_portal_docsite_data.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -132,23 +136,32 @@
             <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div itemprop="articleBody">
                 
-  <noscript>
-  <div id="fallback" class="admonition warning">
-    <p class="last">
-      Please activate JavaScript to enable the search functionality.
-    </p>
-  </div>
-  </noscript>
+  <section id="data-schema">
+<h1>Data Schema<a class="headerlink" href="#data-schema" title="Permalink to this heading">¶</a></h1>
+<p>The Data Portal organizes data in a hierarchial structure.</p>
+<p>The CryoET Data Portal uses the following data schema:</p>
+<p>A dataset is a community contributed set of image files for tilt series, reconstructed tomograms, and if available, cellular and/or subcellular annotation files. Every dataset contains only one sample type prepared and imaged with the same conditions. The dataset title, such as S. pombe cryo-FIB lamellae acquired with defocus-only, summarizes these conditions. Samples can be a cell, tissue or organism; intact organelle; in-vitro mixture of macromolecules or their complex; or in-silico synthetic data, where the experimental conditions are kept constant. Downloading a dataset downloads all files, including all available tilt series, tomograms, and annotations.
+A run is one experiment, or replicate, associated with a dataset, where all runs in a dataset have the same sample and imaging conditions. Every run contains a collection of all tomography data and annotations related to imaging one physical location in a sample. It typically contains one tilt series and all associated data (e.g. movie frames, tilt series image stack, tomograms, annotations, and metadata), but in some cases, it may be a set of tilt series that form a mosaic. When downloading a run from a Portal page, you may choose to download the tomogram or all available annotations. To download all data associated with a run (i.e. all available movie frames, tilt series image stack, tomograms, annotations, and associated metadata), please refer to the API download guide.
+An annotation is a point or segmentation indicating the location of a macromolecular complex in the tomogram. On the run page, you may choose to download tomograms with their annotations.</p>
+<ol class="arabic simple">
+<li><p>Datasets</p></li>
+<li><p>Runs</p></li>
+<li><p>Annotations</p></li>
+<li><p>Depositions</p></li>
+</ol>
+<section id="quickstart">
+<h2>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
 
-  
-  <div id="search-results">
-  
-  </div>
 
             </div>
             
             </div>
-            <footer>
+            <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="python-api.html" class="btn btn-neutral float-left" title="Python API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cryoet_data_portal_docsite_napari.html" class="btn btn-neutral float-right" title="napari" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
@@ -180,14 +193,7 @@
   
   
     
-  
-  <script>
-    jQuery(function() { Search.loadIndex("searchindex.js"); });
-  </script>
-  
-  <script id="searchindexloader"></script>
    
-
 
 </body>
 </html>
