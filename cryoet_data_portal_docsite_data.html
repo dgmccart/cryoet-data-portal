@@ -8,7 +8,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Data Schema &mdash; cryoet-data-portal  documentation</title>
+  <title>Data Organization &mdash; cryoet-data-portal  documentation</title>
   
 
   
@@ -91,8 +91,35 @@
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="cryoet_data_portal_docsite_quick_start.html">Quick start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python-api.html">Python API</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Schema</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#quickstart">Quickstart</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Organization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#datasets">Datasets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dataset-metadata">Dataset Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sample-and-experiment-conditions">Sample and Experiment Conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tilt-series">Tilt Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataset-overview-page">Dataset Overview Page</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tilt-series-quality">Tilt Series Quality</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#dataset-download-options">Dataset Download Options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#runs">Runs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Tilt Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tomogram">Tomogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-overview-page">Run Overview Page</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-download-options">Run Download Options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#annotations">Annotations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#annotation-overview">Annotation Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#annotation-object">Annotation Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#annotation-confidence">Annotation Confidence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#visualizing-annotations-with-tomograms-in-neuroglancer">Visualizing Annotations with Tomograms in Neuroglancer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#annotation-download-options">Annotation Download Options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#depositions">Depositions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cryoet_data_portal_docsite_napari.html">napari</a></li>
@@ -126,7 +153,7 @@
             <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Data Schema</li>
+      <li class="breadcrumb-item active">Data Organization</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/cryoet_data_portal_docsite_data.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -136,21 +163,407 @@
             <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div itemprop="articleBody">
                 
-  <section id="data-schema">
-<h1>Data Schema<a class="headerlink" href="#data-schema" title="Permalink to this heading">¶</a></h1>
-<p>The Data Portal organizes data in a hierarchial structure.</p>
-<p>The CryoET Data Portal uses the following data schema:</p>
-<p>A dataset is a community contributed set of image files for tilt series, reconstructed tomograms, and if available, cellular and/or subcellular annotation files. Every dataset contains only one sample type prepared and imaged with the same conditions. The dataset title, such as S. pombe cryo-FIB lamellae acquired with defocus-only, summarizes these conditions. Samples can be a cell, tissue or organism; intact organelle; in-vitro mixture of macromolecules or their complex; or in-silico synthetic data, where the experimental conditions are kept constant. Downloading a dataset downloads all files, including all available tilt series, tomograms, and annotations.
-A run is one experiment, or replicate, associated with a dataset, where all runs in a dataset have the same sample and imaging conditions. Every run contains a collection of all tomography data and annotations related to imaging one physical location in a sample. It typically contains one tilt series and all associated data (e.g. movie frames, tilt series image stack, tomograms, annotations, and metadata), but in some cases, it may be a set of tilt series that form a mosaic. When downloading a run from a Portal page, you may choose to download the tomogram or all available annotations. To download all data associated with a run (i.e. all available movie frames, tilt series image stack, tomograms, annotations, and associated metadata), please refer to the API download guide.
-An annotation is a point or segmentation indicating the location of a macromolecular complex in the tomogram. On the run page, you may choose to download tomograms with their annotations.</p>
+  <section id="data-organization">
+<h1>Data Organization<a class="headerlink" href="#data-organization" title="Permalink to this heading">¶</a></h1>
+<p>The Data Portal is organized in a hierarchical structure. We welcome contributions to the Portal. <a class="reference external" href="https://airtable.com/apppmytRJXoXYTO9w/shr5UxgeQcUTSGyiY?prefill_Event=Portal&amp;amp;hide_Event=true">Use this form</a> to express interest in adding your data to the Portal.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
+<p>The CryoET Data Portal has 3 levels in the data hierarchy:</p>
+<ul class="simple">
+<li><p><strong>Dataset</strong> is a set of image files for tilt series, reconstructed tomograms, and cellular and/or subcellular annotation files. Every dataset contains only one sample type prepared and imaged with the same conditions. The dataset title, such as “S. pombe cryo-FIB lamellae acquired with defocus-only,” summarizes these conditions. Samples can be a cell, tissue or organism; intact organelle; in-vitro mixture of macromolecules or their complex; or in-silico synthetic data, where the experimental conditions are kept constant. Datasets typically contain multiple runs (see below). Downloading a dataset downloads all files, including all available tilt series, tomograms, and annotations.</p></li>
+<li><p><strong>Run</strong> is one experiment, or replicate, within a dataset, where all runs in a dataset have the same sample and imaging conditions. Every run contains a collection of all tomography data and annotations related to imaging one physical location in a sample. It typically contains one tilt series and all associated data (e.g. movie frames, tilt series image stack, tomograms, annotations, and metadata), but in some cases, it may be a set of tilt series that form a mosaic. Runs contain at least one annotation for every tomogram. When downloading a run from a Portal page, you may choose to download the tomogram or all available annotations. To download all data associated with a run (i.e. all available movie frames, tilt series image stack, tomograms, annotations, and associated metadata), use the API.</p></li>
+<li><p><strong>Annotation</strong> is a point or segmentation indicating the location of a macromolecular complex in the tomogram. On a run overview page, you may choose to download individual annotations.</p></li>
+</ul>
+<p>For more detailed explanations refer to the sections below.</p>
 <ol class="arabic simple">
-<li><p>Datasets</p></li>
-<li><p>Runs</p></li>
-<li><p>Annotations</p></li>
-<li><p>Depositions</p></li>
+<li><p><a class="reference internal" href="#datasets"><span class="std std-ref">Datasets</span></a></p></li>
+<li><p><a class="reference internal" href="#runs"><span class="std std-ref">Runs</span></a></p></li>
+<li><p><a class="reference internal" href="#annotations"><span class="std std-ref">Annotations</span></a></p></li>
+<li><p><a class="reference internal" href="#depositions"><span class="std std-ref">Depositions</span></a> - <em>Coming Soon!</em></p></li>
 </ol>
-<section id="quickstart">
-<h2>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="datasets">
+<h2>Datasets<a class="headerlink" href="#datasets" title="Permalink to this heading">¶</a></h2>
+<p>Datasets are contributed sets of image files associated with imaging one sample type with the same sample preparation and imaging settings. Datasets contain runs, where each run corresponds to imaging one physical location in the prepared samples.</p>
+<p>The Browse Datasets page shows a table of all datasets on the Portal. These datasets are not currently ordered. Instead, the right side filter panel provides options for filtering the table according to files included in the datasets, such as ground truth annotation files; the author or ID of the dataset; organism in the sample; hardware; metadata for the tilt series or reconstructed tomograms. In addition, the search bar filters based on keywords or phrases. The dataset entries in the table have descriptive names, such as “S. pombe cryo-FIB lamellae acquired with defocus-only,” which aim to summarize the experiment as well as a Dataset ID assigned by the Portal, the organism name, number of runs in the dataset, and list of annotated objects, such as membrane. Datasets on the Portal may be found in other image databases. On the Browse Datasets page, the datasets table shows the EMPIAR ID for datasets that are also found on the Electron Microscopy Public Image Archive.</p>
+<p>On a given Dataset Overview page, the View All Info panel contains metadata for the dataset. These metadata are defined in the tables below including their mapping to attributes in the Portal API:</p>
+<section id="dataset-metadata">
+<h3>Dataset Metadata<a class="headerlink" href="#dataset-metadata" title="Permalink to this heading">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Metadata</p></th>
+<th class="head text-center"><p>API field</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>5</p></td>
+<td class="text-center"><p>Excellent</p></td>
+<td class="text-left"><p>Full Tilt Series/Reconstructions could be used in publication ready figures.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>4</p></td>
+<td class="text-center"><p>Good</p></td>
+<td class="text-left"><p>Full Tilt Series/Reconstructions are useful for analysis (subtomogram averaging, segmentation).</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>3</p></td>
+<td class="text-center"><p>Medium</p></td>
+<td class="text-left"><p>Minor parts of the tilt series (projection images) need to be or have been discarded prior to reconstruction and analysis.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>2</p></td>
+<td class="text-center"><p>Marginal</p></td>
+<td class="text-left"><p>Major parts of the tilt series (projection images) need to be or have been discarded prior to reconstruction and analysis. Useful for analysis only after heavy manual intervention.</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>Low</p></td>
+<td class="text-left"><p>Not useful for analysis with current tools (not alignable), useful as a test case for problematic data only.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sample-and-experiment-conditions">
+<h3>Sample and Experiment Conditions<a class="headerlink" href="#sample-and-experiment-conditions" title="Permalink to this heading">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Metadata</p></th>
+<th class="head text-center"><p>API field</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>5</p></td>
+<td class="text-center"><p>Excellent</p></td>
+<td class="text-left"><p>Full Tilt Series/Reconstructions could be used in publication ready figures.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>4</p></td>
+<td class="text-center"><p>Good</p></td>
+<td class="text-left"><p>Full Tilt Series/Reconstructions are useful for analysis (subtomogram averaging, segmentation).</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>3</p></td>
+<td class="text-center"><p>Medium</p></td>
+<td class="text-left"><p>Minor parts of the tilt series (projection images) need to be or have been discarded prior to reconstruction and analysis.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>2</p></td>
+<td class="text-center"><p>Marginal</p></td>
+<td class="text-left"><p>Major parts of the tilt series (projection images) need to be or have been discarded prior to reconstruction and analysis. Useful for analysis only after heavy manual intervention.</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>Low</p></td>
+<td class="text-left"><p>Not useful for analysis with current tools (not alignable), useful as a test case for problematic data only.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tilt-series">
+<h3>Tilt Series<a class="headerlink" href="#tilt-series" title="Permalink to this heading">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Metadata</p></th>
+<th class="head text-center"><p>API field</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>5</p></td>
+<td class="text-center"><p>Excellent</p></td>
+<td class="text-left"><p>Full Tilt Series/Reconstructions could be used in publication ready figures.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>4</p></td>
+<td class="text-center"><p>Good</p></td>
+<td class="text-left"><p>Full Tilt Series/Reconstructions are useful for analysis (subtomogram averaging, segmentation).</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>3</p></td>
+<td class="text-center"><p>Medium</p></td>
+<td class="text-left"><p>Minor parts of the tilt series (projection images) need to be or have been discarded prior to reconstruction and analysis.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>2</p></td>
+<td class="text-center"><p>Marginal</p></td>
+<td class="text-left"><p>Major parts of the tilt series (projection images) need to be or have been discarded prior to reconstruction and analysis. Useful for analysis only after heavy manual intervention.</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>Low</p></td>
+<td class="text-left"><p>Not useful for analysis with current tools (not alignable), useful as a test case for problematic data only.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dataset-overview-page">
+<h3>Dataset Overview Page<a class="headerlink" href="#dataset-overview-page" title="Permalink to this heading">¶</a></h3>
+<p>The table on a Dataset Overview page contains an overview of the runs in the dataset. Each run has a name defined by the dataset authors as well as a Run ID, which is assigned by the Portal and is subject to change in the rare case where the run data needs to be re-ingested in the Portal. In addition to the run name, the tilt series quality and list of annotated objects is detailed for each run. Each entry has a View Tomogram button which will display the tomogram using an instance of Neuroglancer in the browser. The tomogram is visualized along with annotations that are manually chosen to display as many annotations as possible without overlap or occlusion.</p>
+<section id="tilt-series-quality">
+<h4>Tilt Series Quality<a class="headerlink" href="#tilt-series-quality" title="Permalink to this heading">¶</a></h4>
+<p>The tilt series quality score is assigned by the dataset authors and is meant for comparing tilt series within a dataset on a relative subjective scale to communicate their quality estimate to users. Score ranges 1-5, with 5 being best. Below is an example scale based mainly on alignability and usefulness for the intended analysis.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Rating</p></th>
+<th class="head text-center"><p>Quality</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>5</p></td>
+<td class="text-center"><p>Excellent</p></td>
+<td class="text-left"><p>Full Tilt Series/Reconstructions could be used in publication ready figures.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>4</p></td>
+<td class="text-center"><p>Good</p></td>
+<td class="text-left"><p>Full Tilt Series/Reconstructions are useful for analysis (subtomogram averaging, segmentation).</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>3</p></td>
+<td class="text-center"><p>Medium</p></td>
+<td class="text-left"><p>Minor parts of the tilt series (projection images) need to be or have been discarded prior to reconstruction and analysis.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>2</p></td>
+<td class="text-center"><p>Marginal</p></td>
+<td class="text-left"><p>Major parts of the tilt series (projection images) need to be or have been discarded prior to reconstruction and analysis. Useful for analysis only after heavy manual intervention.</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>Low</p></td>
+<td class="text-left"><p>Not useful for analysis with current tools (not alignable), useful as a test case for problematic data only.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="dataset-download-options">
+<h3>Dataset Download Options<a class="headerlink" href="#dataset-download-options" title="Permalink to this heading">¶</a></h3>
+<p>Download options
+In GUI
+aws s3 –no-sign-request sync s3://cryoet-data-portal-public/10027/ 10027
+Download methods
+from cryoet_data_portal import Client, Dataset</p>
+<p>client = Client()</p>
+<p>dataset = Dataset.get_by_id(client, 10027)
+dataset.download_everything(‘10027’)
+What do you get?
+Folder</p>
+</section>
+</section>
+<section id="runs">
+<h2>Runs<a class="headerlink" href="#runs" title="Permalink to this heading">¶</a></h2>
+<p>A tomography run is a collection of all data and annotations related to one physical location in a sample and is associated with a dataset that typically contains many other runs. An overview of all runs in a dataset is presented in the Dataset Overview page.</p>
+<p>Each run has its own Run Overview Page, where the View All Info panel contains metadata for the run. These metadata are defined in the tables below including their mapping to attributes in the Portal API:</p>
+<section id="id1">
+<h3>Tilt Series<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
+<p>This table contains all the information in the Dataset Tilt Series metadata with some additional fields.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Metadata</p></th>
+<th class="head text-center"><p>API field</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>5</p></td>
+<td class="text-center"><p>Excellent</p></td>
+<td class="text-left"><p>Full Tilt Series/Reconstructions could be used in publication ready figures.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>4</p></td>
+<td class="text-center"><p>Good</p></td>
+<td class="text-left"><p>Full Tilt Series/Reconstructions are useful for analysis (subtomogram averaging, segmentation).</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>3</p></td>
+<td class="text-center"><p>Medium</p></td>
+<td class="text-left"><p>Minor parts of the tilt series (projection images) need to be or have been discarded prior to reconstruction and analysis.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>2</p></td>
+<td class="text-center"><p>Marginal</p></td>
+<td class="text-left"><p>Major parts of the tilt series (projection images) need to be or have been discarded prior to reconstruction and analysis. Useful for analysis only after heavy manual intervention.</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>Low</p></td>
+<td class="text-left"><p>Not useful for analysis with current tools (not alignable), useful as a test case for problematic data only.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tomogram">
+<h3>Tomogram<a class="headerlink" href="#tomogram" title="Permalink to this heading">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Metadata</p></th>
+<th class="head text-center"><p>API field</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>5</p></td>
+<td class="text-center"><p>Excellent</p></td>
+<td class="text-left"><p>Full Tilt Series/Reconstructions could be used in publication ready figures.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>4</p></td>
+<td class="text-center"><p>Good</p></td>
+<td class="text-left"><p>Full Tilt Series/Reconstructions are useful for analysis (subtomogram averaging, segmentation).</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>3</p></td>
+<td class="text-center"><p>Medium</p></td>
+<td class="text-left"><p>Minor parts of the tilt series (projection images) need to be or have been discarded prior to reconstruction and analysis.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>2</p></td>
+<td class="text-center"><p>Marginal</p></td>
+<td class="text-left"><p>Major parts of the tilt series (projection images) need to be or have been discarded prior to reconstruction and analysis. Useful for analysis only after heavy manual intervention.</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>Low</p></td>
+<td class="text-left"><p>Not useful for analysis with current tools (not alignable), useful as a test case for problematic data only.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="run-overview-page">
+<h3>Run Overview Page<a class="headerlink" href="#run-overview-page" title="Permalink to this heading">¶</a></h3>
+<p>The summary on the Run Overview page shows a subset of the run metadata as well as the number and type of files in the run and the <a class="reference internal" href="#tilt-series-quality"><span class="std std-ref">tilt series quality score</span></a>.The View Tomogram button opens the associated tomogram along with annotations using an instance of Neuroglancer in the browser. The annotations displayed with the tomogram are manually chosen to display as many annotations as possible without overlap or occlusion.</p>
+<p>The table on a Run Overview page contains an overview of the annotations for the tomograms in this run. Each annotation has an Annotation ID, which is assigned by the Portal and is subject to change in the rare case where the annotation data needs to be re-ingested in the Portal. In addition to the Annotation ID, the table shows the object annotated as well as the type of the annotation, such as segmentation or point.</p>
+</section>
+<section id="run-download-options">
+<h3>Run Download Options<a class="headerlink" href="#run-download-options" title="Permalink to this heading">¶</a></h3>
+<p>Download
+Direct download
+Tomogram
+Select tomogram based on sampling, processing, file format (zarr or mrc)
+Direct download
+Curl, aws, API
+API
+from cryoet_data_portal import Client, Tomogram</p>
+<p>client = Client()</p>
+<p>tomogram = Tomogram.get_by_id(client, 1014)
+tomogram.download_mrcfile()</p>
+<p>All Annotations
+from cryoet_data_portal import (
+Client,
+TomogramVoxelSpacing,
+)</p>
+<p>client = Client()
+tomogram_voxel_spacing = TomogramVoxelSpacing.get_by_id(
+client,
+894,
+)</p>
+<p>for annotation in tomogram_voxel_spacing.annotations:
+annotation.download()
+Download individual annotations using the download button
+All data using API
+from cryoet_data_portal import Client, Dataset</p>
+<p>client = Client()</p>
+<p>dataset = Dataset.get_by_id(client, 644)
+dataset.download_everything(‘644’)</p>
+</section>
+</section>
+<section id="annotations">
+<h2>Annotations<a class="headerlink" href="#annotations" title="Permalink to this heading">¶</a></h2>
+<p>Annotations are summarized in a table on Run Overview pages. Each annotation has an Annotation ID, which is assigned by the Portal and is subject to change in the rare case where the annotation data needs to be re-ingested in the Portal. Each annotation labels exactly one type of object, such as ribosome or membrane, indicated by the Object Type column of the table. For every object, there is one type of annotation per entry in the table indicated in the Object Shape Type column. The options are Segmentation for semantic segmentation masks, Instance Segmentation for segmentation masks where each individual object is labeled with its own color, Point for point annotations, and Oriented Point for point annotations that have an associated vector. Annotations also have an optional precision field, which is the percentage of true positives among the total number of positive predictions where a value of 100% means everything found is actually the object of interest, and a recall field, which is the percentage of true positives among the actual number of objects where a value of 100% meaning all objects of interest were found.</p>
+<p>Authors may also utilize the Ground Truth flag on entries in the annotation table. The Ground Truth flag indicates that this annotation is endorsed by the author for use as training or validation data for machine learning models.</p>
+<p>Each annotation has its own metadata, which can be viewed using the info icon on the entry in the annotations table. These metadata are defined in the tables below including their mapping to attributes in the Portal API:</p>
+<section id="annotation-overview">
+<h3>Annotation Overview<a class="headerlink" href="#annotation-overview" title="Permalink to this heading">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Metadata</p></th>
+<th class="head text-center"><p>API field</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>5</p></td>
+<td class="text-center"><p>Excellent</p></td>
+<td class="text-left"><p>Full Tilt Series/Reconstructions could be used in publication ready figures.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>4</p></td>
+<td class="text-center"><p>Good</p></td>
+<td class="text-left"><p>Full Tilt Series/Reconstructions are useful for analysis (subtomogram averaging, segmentation).</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>3</p></td>
+<td class="text-center"><p>Medium</p></td>
+<td class="text-left"><p>Minor parts of the tilt series (projection images) need to be or have been discarded prior to reconstruction and analysis.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>2</p></td>
+<td class="text-center"><p>Marginal</p></td>
+<td class="text-left"><p>Major parts of the tilt series (projection images) need to be or have been discarded prior to reconstruction and analysis. Useful for analysis only after heavy manual intervention.</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>Low</p></td>
+<td class="text-left"><p>Not useful for analysis with current tools (not alignable), useful as a test case for problematic data only.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="annotation-object">
+<h3>Annotation Object<a class="headerlink" href="#annotation-object" title="Permalink to this heading">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Metadata</p></th>
+<th class="head text-center"><p>API field</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>5</p></td>
+<td class="text-center"><p>Excellent</p></td>
+<td class="text-left"><p>Full Tilt Series/Reconstructions could be used in publication ready figures.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>4</p></td>
+<td class="text-center"><p>Good</p></td>
+<td class="text-left"><p>Full Tilt Series/Reconstructions are useful for analysis (subtomogram averaging, segmentation).</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>3</p></td>
+<td class="text-center"><p>Medium</p></td>
+<td class="text-left"><p>Minor parts of the tilt series (projection images) need to be or have been discarded prior to reconstruction and analysis.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>2</p></td>
+<td class="text-center"><p>Marginal</p></td>
+<td class="text-left"><p>Major parts of the tilt series (projection images) need to be or have been discarded prior to reconstruction and analysis. Useful for analysis only after heavy manual intervention.</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>Low</p></td>
+<td class="text-left"><p>Not useful for analysis with current tools (not alignable), useful as a test case for problematic data only.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="annotation-confidence">
+<h3>Annotation Confidence<a class="headerlink" href="#annotation-confidence" title="Permalink to this heading">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Metadata</p></th>
+<th class="head text-center"><p>API field</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>5</p></td>
+<td class="text-center"><p>Excellent</p></td>
+<td class="text-left"><p>Full Tilt Series/Reconstructions could be used in publication ready figures.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>4</p></td>
+<td class="text-center"><p>Good</p></td>
+<td class="text-left"><p>Full Tilt Series/Reconstructions are useful for analysis (subtomogram averaging, segmentation).</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>3</p></td>
+<td class="text-center"><p>Medium</p></td>
+<td class="text-left"><p>Minor parts of the tilt series (projection images) need to be or have been discarded prior to reconstruction and analysis.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>2</p></td>
+<td class="text-center"><p>Marginal</p></td>
+<td class="text-left"><p>Major parts of the tilt series (projection images) need to be or have been discarded prior to reconstruction and analysis. Useful for analysis only after heavy manual intervention.</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>Low</p></td>
+<td class="text-left"><p>Not useful for analysis with current tools (not alignable), useful as a test case for problematic data only.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="visualizing-annotations-with-tomograms-in-neuroglancer">
+<h3>Visualizing Annotations with Tomograms in Neuroglancer<a class="headerlink" href="#visualizing-annotations-with-tomograms-in-neuroglancer" title="Permalink to this heading">¶</a></h3>
+<p>There is no definitive rule for which annotations are displayed with a tomogram in Neuroglancer by default. The annotations are manually chosen by the data curation team to display as many annotations as possible without overlap or occlusion. For example, when the cytoplasm is annotated as a whole, it would occlude other annotations included within, such as protein picks. When there is a ground truth and predicted annotation, the ground truth annotation is displayed by default. Authors contributing data can specify the desired default annotations during the submission process.</p>
+<p>The CryoET Data Portal napari plugin can be used to visualize tomograms, annotations, and metadata. Refer to <a class="reference external" href="https://github.com/chanzuckerberg/napari-cryoet-data-portal#usage">this documentation</a> to learn about how to use the plugin and to <a class="reference external" href="https://chanzuckerberg.github.io/cryoet-data-portal/cryoet_data_portal_docsite_napari.html">this page</a> to learn more about napari and CryoET Data Portal.</p>
+</section>
+<section id="annotation-download-options">
+<h3>Annotation Download Options<a class="headerlink" href="#annotation-download-options" title="Permalink to this heading">¶</a></h3>
+</section>
+</section>
+<section id="depositions">
+<h2>Depositions<a class="headerlink" href="#depositions" title="Permalink to this heading">¶</a></h2>
+<p>Depositions are collections of data submitted together. All data being submitted together will be tagged with the same deposition ID. On the Portal, we will surface depositions that contain annotations submitted together.</p>
+<p><em>More information is coming soon!</em></p>
 </section>
 </section>
 
