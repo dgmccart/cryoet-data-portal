@@ -58,19 +58,22 @@
     <!-- top 48px for navbar height -->
     <div class="navbar-cet">
         <div style="padding: 0 16px; display: flex; height: inherit; align-items: center; justify-content: space-between;">
-            <span style="display:flex; gap: 32px; align-items: center;">
-                <a href="https://www.czimaginginstitute.org/">
-                  <img src="_static/img/czi-imaging-institute.png" style="height: 45px; width: 45px;" />
-                </a>
-                <span style="display:flex; gap: 16px;">
-                    <span class="navbar-cet-link">
-                      <a class="navbar-cet-anchor" href="index.html">CryoET Data Portal | Documentation</a>
-                  </span>
-                </span>
+            <span style="display:flex; gap: 8px; align-items: center;">
+              <a href="index.html" style="color: #fff">CryoET Data Portal</a>
+              <img alt="beta" src="_static/img/beta.svg">
+              <div style="width: 1px; height: 16px; background: #999; margin: 0 4px"></div>
+              <span style="color: #fff">Documentation</span>
             </span>
 
             <span class="navbar-cet-link">
-              <a class="navbar-cet-anchor" href="https://cryoetdataportal.czscience.com/">CryoET Data Portal</a>
+              <a
+                class="navbar-cet-anchor"
+                href="https://cryoetdataportal.czscience.com/"
+                target="_blank"
+                rel="noopener"
+              >
+                Go to CryoET Data Portal
+              </a>
             </span>
         </div>
     </div>
@@ -162,8 +165,8 @@
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
 <p>The CryoET Data Portal has 3 levels in the data hierarchy:</p>
 <ul class="simple">
-<li><p><strong>Dataset</strong> is a set of image files for tilt series, reconstructed tomograms, and cellular and/or subcellular annotation files. Every dataset contains only one sample type prepared and imaged with the same conditions. The dataset title, such as “S. pombe cryo-FIB lamellae acquired with defocus-only,” summarizes these conditions. Samples can be a cell, tissue or organism; intact organelle; in-vitro mixture of macromolecules or their complex; or in-silico synthetic data, where the experimental conditions are kept constant. Datasets typically contain multiple runs (see below). Downloading a dataset downloads all files, including all available tilt series, tomograms, and annotations.</p></li>
-<li><p><strong>Run</strong> is one experiment, or replicate, within a dataset, where all runs in a dataset have the same sample and imaging conditions. Every run contains a collection of all tomography data and annotations related to imaging one physical location in a sample. It typically contains one tilt series and all associated data (e.g. movie frames, tilt series image stack, tomograms, annotations, and metadata), but in some cases, it may be a set of tilt series that form a mosaic. Runs contain at least one annotation for every tomogram. When downloading a run from a Portal page, you may choose to download the tomogram or all available annotations. To download all data associated with a run (i.e. all available movie frames, tilt series image stack, tomograms, annotations, and associated metadata), <a class="reference internal" href="#run-download-options"><span class="std std-ref">use the API</span></a>.</p></li>
+<li><p><strong>Dataset</strong> is a set of image files for tilt series, reconstructed tomograms, and cellular and/or subcellular annotation files. Every dataset contains only one sample type prepared with the same conditions. The dataset title, such as “S. pombe cryo-FIB lamellae acquired with defocus-only,” summarizes these conditions. Samples can be a cell, tissue or organism; intact organelle; in-vitro mixture of macromolecules or their complex; or in-silico synthetic data, where the experimental conditions are kept constant. Datasets typically contain multiple runs (see below). Downloading a dataset downloads all files, including all available tilt series, tomograms, and annotations.</p></li>
+<li><p><strong>Run</strong> is one experiment, or replicate, within a dataset, where all runs in a dataset have the same sample conditions. Every run contains a collection of all tomography data and annotations related to imaging one physical location in a sample. It typically contains one tilt series and all associated data (e.g. movie frames, tilt series image stack, tomograms, annotations, and metadata), but in some cases, it may be a set of tilt series that form a mosaic. Runs contain at least one annotation for every tomogram. When downloading a run from a Portal page, you may choose to download the tomogram or all available annotations. To download all data associated with a run (i.e. all available movie frames, tilt series image stack, tomograms, annotations, and associated metadata), <a class="reference internal" href="#run-download-options"><span class="std std-ref">use the API</span></a>.</p></li>
 <li><p><strong>Annotation</strong> is a point or segmentation indicating the location of a macromolecular complex in the tomogram. On a run overview page, you may choose to download individual annotations.</p></li>
 </ul>
 <p>For more detailed explanations refer to the sections below.</p>
@@ -176,8 +179,8 @@
 </section>
 <section id="datasets">
 <h2>Datasets<a class="headerlink" href="#datasets" title="Permalink to this heading">¶</a></h2>
-<p>Datasets are contributed sets of image files associated with imaging one sample type with the same sample preparation and imaging settings. Datasets contain runs, where each run corresponds to imaging one physical location in the prepared samples.</p>
-<p>The Browse Datasets page shows a table of all datasets on the Portal. These datasets are not currently ordered. Instead, the right side filter panel provides options for filtering the table according to files included in the datasets, such as ground truth annotation files; the author or ID of the dataset; organism in the sample; hardware; metadata for the tilt series or reconstructed tomograms. In addition, the search bar filters based on keywords or phrases. The dataset entries in the table have descriptive names, such as “S. pombe cryo-FIB lamellae acquired with defocus-only,” which aim to summarize the experiment as well as a Dataset ID assigned by the Portal, the organism name, number of runs in the dataset, and list of annotated objects, such as membrane. Datasets on the Portal may be found in other image databases. On the Browse Datasets page, the datasets table shows the EMPIAR ID for datasets that are also found on the Electron Microscopy Public Image Archive.</p>
+<p>Datasets are contributed sets of image files associated with imaging one sample type with the same sample preparation methods. Datasets contain runs, where each run corresponds to imaging one physical location in the prepared samples.</p>
+<p>The Browse Datasets page shows a table of all datasets on the Portal. These datasets are not currently ordered. Instead, the left side filter panel provides options for filtering the table according to files included in the datasets, such as ground truth annotation files; the author or ID of the dataset; organism in the sample; hardware; metadata for the tilt series or reconstructed tomograms. In addition, the search bar filters based on keywords or phrases contained in the dataset titles. The dataset entries in the table have descriptive names, such as “S. pombe cryo-FIB lamellae acquired with defocus-only,” which aim to summarize the experiment as well as a Dataset ID assigned by the Portal, the organism name, number of runs in the dataset, and list of annotated objects, such as membrane. Datasets on the Portal may be found in other image databases. On the Browse Datasets page, the datasets table shows the EMPIAR ID for datasets that are also found on the Electron Microscopy Public Image Archive.</p>
 <p>On a given Dataset Overview page, the View All Info panel contains metadata for the dataset.</p>
 <section id="dataset-overview-page">
 <h3>Dataset Overview Page<a class="headerlink" href="#dataset-overview-page" title="Permalink to this heading">¶</a></h3>
