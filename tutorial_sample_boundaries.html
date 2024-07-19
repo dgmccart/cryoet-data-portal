@@ -46,7 +46,9 @@
 
     
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Examples" href="cryoet_data_portal_docsite_examples.html" />
+    <link rel="prev" title="napari" href="cryoet_data_portal_docsite_napari.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -89,11 +91,36 @@
                 
                 
                 
-                <ul>
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="cryoet_data_portal_docsite_quick_start.html">Quick start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python-api.html">Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cryoet_data_portal_docsite_data.html">Data Organization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cryoet_data_portal_docsite_napari.html">napari</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Predicting sample boundaries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#step-0-environment-and-pre-requisites">Step 0: Environment and Pre-requisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#chimerax-and-chimerax-copick-for-visualization-and-annotation">1. ChimeraX and ChimeraX-copick (for visualization and annotation)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#album-and-copick-catalog-for-processing-steps">2. Album and copick-catalog (for processing steps)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#j-finder-for-segmentation">3. J-finder (for segmentation)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-1-setup-your-copick-projects">Step 1: Setup your copick projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-2-annotate-the-training-set">Step 2: Annotate the training set</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-3-create-the-training-data">Step 3: Create the training data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#valid-reconstruction-area">Valid reconstruction area</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sample">Sample</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#intersection">Intersection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#training-data">Training data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-4-train-the-model">Step 4: Train the model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-the-multilabel-segmentation">Create the multilabel segmentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#train-the-model">Train the model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-5-evaluate-the-model">Step 5: Evaluate the model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-6-post-processing">Step 6: Post-processing</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="cryoet_data_portal_docsite_examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cryoet_data_portal_docsite_aws.html">Download Data using AWS CLI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cryoet_data_portal_docsite_faq.html">Frequently Asked Questions</a></li>
@@ -153,10 +180,10 @@ and contain a significant amount of empty space (i.e. the vacuum inside the TEM 
 <li><p>masking out the vacuum region during the training of a neural network</p></li>
 <li><p>capping of membrane segmentations to define topological boundaries</p></li>
 </ul>
-<p>Below, we will show how to use <strong>copick</strong>, an adapted version of <a class="reference external" href="https://github.com/jtschwar/cryoet-deepfinder/tree/master">deepfinder</a>
+<p>Below, we will show how to use <a class="reference external" href="https://github.com/copick/copick"><strong>copick</strong></a>, an adapted version of <a class="reference external" href="https://github.com/jtschwar/cryoet-deepfinder/tree/master">deepfinder</a>
 and <a class="reference external" href="https://album.solutions/">album</a> to predict sample boundaries for datasets <a class="reference external" href="https://cryoetdataportal.czscience.com/datasets/10301">10301</a>
 and <a class="reference external" href="https://cryoetdataportal.czscience.com/datasets/10302">10302</a> from the
-<a class="reference external" href="https://cryoetdataportal.czscience.com">CZ cryoET Data Portal</a>.</p>
+<a class="reference external" href="https://cryoetdataportal.czscience.com">CZ cryoET Data Portal</a>. Copick is a cross-platform, storage-agnostic and server-less dataset API for cryoET datasets.</p>
 <figure markdown="span">
   ![topview](./figures/tomo_top_both.png){width="400"}
   <figcaption>Top view onto the same tomogram (<a href="https://cryoetdataportal.czscience.com/runs/15094">run 15094</a>)
@@ -537,7 +564,10 @@ parallel sides to the segmentation.</p>
             </div>
             
             </div>
-            <footer>
+            <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cryoet_data_portal_docsite_napari.html" class="btn btn-neutral float-left" title="napari" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cryoet_data_portal_docsite_examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
