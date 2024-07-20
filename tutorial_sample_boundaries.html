@@ -163,9 +163,8 @@
                 
   <section id="predicting-sample-boundaries">
 <h1>Predicting sample boundaries<a class="headerlink" href="#predicting-sample-boundaries" title="Permalink to this heading">¶</a></h1>
-<p><img alt="tutorial-goal" src="figures/tomo_side_light.png#only-light" />
-<em>Side view onto a cryo-electron tomogram (<a href="https://cryoetdataportal.czscience.com/runs/15094">run 15094</a>)
-without (left) and with (right) sample boundary annotation</em></p>
+<p><img alt="tutorial-goal" src="_images/tomo_side_light.png" />
+<em>Side view onto a cryo-electron tomogram <a class="reference external" href="https://cryoetdataportal.czscience.com/runs/15094">run 15094</a> without (left) and with (right) sample boundary annotation</em></p>
 <p>Biological samples acquired in a cryoET experiment are usually thin slabs of vitrified ice containing the biological
 specimen of interest. Unfortunately, it is difficult to determine orientation and thickness of the samples ahead of
 reconstruction. For this reason, volumes reconstructed from cryoET tilt series are often larger than the actual sample
@@ -243,16 +242,16 @@ describing the objects that can be accessed and created using the copick API.</p
 description, and copick-API version.</p>
 <details>
   <summary>config_train.json</summary>
-    ```json
-    {
-      "config_type": "cryoet_data_portal",
-      "name": "Sample Boundary Prediction - Training Set",
-      "description": "This project uses dataset 10301 from the CZ cryoET Data Portal as a training set for sample boundary prediction.",
-      "version": "0.5.4"
-    }
-    ```
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;config_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cryoet_data_portal&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sample Boundary Prediction - Training Set&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This project uses dataset 10301 from the CZ cryoET Data Portal as a training set for sample boundary prediction.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.5.4&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+</pre></div>
+</div>
 </details>
-<p>Next, we define the objects that can be accessed and created using the copick API. In this case we will create X objects:</p>
+<p>Next, we define the objects that can be accessed and created using the copick API. In this case we will create 5 objects:</p>
 <ul class="simple">
 <li><p>top-layer – the top layer of the sample</p></li>
 <li><p>bottom-layer – the bottom layer of the sample</p></li>
@@ -262,88 +261,230 @@ description, and copick-API version.</p>
 </ul>
 <details>
   <summary>config_train.json</summary>
-    ```json
-    {
-      "pickable_objects": [
-            {
-                "name": "top-layer",
-                "is_particle": true,
-                "label": 100,
-                "color": [  255, 0, 0, 255],
-                "radius": 150,
-                "map_threshold": 0.037
-            },
-            {
-                "name": "bottom-layer",
-                "is_particle": true,
-                "label": 101,
-                "color": [
-                    0,
-                    255,
-                    0,
-                    255
-                ],
-                "radius": 150,
-                "map_threshold": 0.037
-            },
-            {
-                "name": "sample",
-                "is_particle": false,
-                "label": 102,
-                "color": [  0, 0, 255, 128],
-                "radius": 150,
-                "map_threshold": 0.037
-            },
-            {
-                "name": "valid-area",
-                "is_particle": false,
-                "label": 103,
-                "color": [
-                    255,
-                    255,
-                    0,
-                    128
-                ],
-                "radius": 150,
-                "map_threshold": 0.037
-            },
-            {
-                "name": "valid-sample",
-                "is_particle": false,
-                "label": 2,
-                "color": [
-                    0,
-                    255,
-                    255,
-                    128
-                ],
-                "radius": 150,
-                "map_threshold": 0.037
-            }
-        ]
-    }
-    ```
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;pickable_objects&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;top-layer&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;is_particle&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">  </span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">],</span>
+<span class="w">              </span><span class="nt">&quot;radius&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;map_threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.037</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bottom-layer&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;is_particle&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">101</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">255</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">255</span>
+<span class="w">              </span><span class="p">],</span>
+<span class="w">              </span><span class="nt">&quot;radius&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;map_threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.037</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sample&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;is_particle&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">102</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">  </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">128</span><span class="p">],</span>
+<span class="w">              </span><span class="nt">&quot;radius&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;map_threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.037</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;valid-area&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;is_particle&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">103</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="mi">255</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">255</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">128</span>
+<span class="w">              </span><span class="p">],</span>
+<span class="w">              </span><span class="nt">&quot;radius&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;map_threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.037</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;valid-sample&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;is_particle&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">255</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">255</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">128</span>
+<span class="w">              </span><span class="p">],</span>
+<span class="w">              </span><span class="nt">&quot;radius&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;map_threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.037</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+</pre></div>
+</div>
 </details>
 <p>Finally, we define where <strong>copick</strong> should look for the data and store any annotations (in this case the home directory
 of Bob).</p>
 <details>
   <summary>config_train.json</summary>
-    ```json
-    {
-      "overlay_root": "local:///home/bob/copick_project_train/",
-      "overlay_fs_args": {
-        "auto_mkdir": true
-      },
-      "dataset_ids" : [10301]
-    }
-    ```
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;overlay_root&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;local:///home/bob/copick_project_train/&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;overlay_fs_args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;auto_mkdir&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;dataset_ids&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">10301</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+</pre></div>
+</div>
 </details>
 <p>We will repeat this process for a second project, <code class="docutils literal notranslate"><span class="pre">config_evaluate.json</span></code>, that includes both dataset 10301 and dataset
 10302 for evaluation. Find both full examples below:</p>
-<p>??? example “<code class="docutils literal notranslate"><span class="pre">config_train.json</span></code>”
-<code class="docutils literal notranslate"><span class="pre">json</span>&#160;&#160;&#160;&#160; <span class="pre">{</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;config_type&quot;:</span> <span class="pre">&quot;cryoet_data_portal&quot;,</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;name&quot;:</span> <span class="pre">&quot;Sample</span> <span class="pre">Boundary</span> <span class="pre">Prediction</span> <span class="pre">-</span> <span class="pre">Training</span> <span class="pre">Set&quot;,</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;description&quot;:</span> <span class="pre">&quot;This</span> <span class="pre">project</span> <span class="pre">uses</span> <span class="pre">dataset</span> <span class="pre">10301</span> <span class="pre">from</span> <span class="pre">the</span> <span class="pre">CZ</span> <span class="pre">cryoET</span> <span class="pre">Data</span> <span class="pre">Portal</span> <span class="pre">as</span> <span class="pre">a</span> <span class="pre">training</span> <span class="pre">set</span> <span class="pre">for</span> <span class="pre">sample</span> <span class="pre">boundary</span> <span class="pre">prediction.&quot;,</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;version&quot;:</span> <span class="pre">&quot;0.5.4&quot;,</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;pickable_objects&quot;:</span> <span class="pre">[</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">{</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;name&quot;:</span> <span class="pre">&quot;top-layer&quot;,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;is_particle&quot;:</span> <span class="pre">true,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;label&quot;:</span> <span class="pre">100,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;color&quot;:</span> <span class="pre">[</span>&#160; <span class="pre">255,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">255],</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;radius&quot;:</span> <span class="pre">150,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;map_threshold&quot;:</span> <span class="pre">0.037</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">},</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">{</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;name&quot;:</span> <span class="pre">&quot;bottom-layer&quot;,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;is_particle&quot;:</span> <span class="pre">true,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;label&quot;:</span> <span class="pre">101,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;color&quot;:</span> <span class="pre">[</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">0,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">255,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">0,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">255</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">],</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;radius&quot;:</span> <span class="pre">150,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;map_threshold&quot;:</span> <span class="pre">0.037</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">},</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">{</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;name&quot;:</span> <span class="pre">&quot;sample&quot;,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;is_particle&quot;:</span> <span class="pre">false,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;label&quot;:</span> <span class="pre">102,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;color&quot;:</span> <span class="pre">[</span>&#160; <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">255,</span> <span class="pre">128],</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;radius&quot;:</span> <span class="pre">150,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;map_threshold&quot;:</span> <span class="pre">0.037</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">},</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">{</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;name&quot;:</span> <span class="pre">&quot;valid-area&quot;,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;is_particle&quot;:</span> <span class="pre">false,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;label&quot;:</span> <span class="pre">103,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;color&quot;:</span> <span class="pre">[</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">255,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">255,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">0,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">128</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">],</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;radius&quot;:</span> <span class="pre">150,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;map_threshold&quot;:</span> <span class="pre">0.037</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">},</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">{</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;name&quot;:</span> <span class="pre">&quot;valid-sample&quot;,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;is_particle&quot;:</span> <span class="pre">false,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;label&quot;:</span> <span class="pre">2,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;color&quot;:</span> <span class="pre">[</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">0,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">255,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">255,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">128</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">],</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;radius&quot;:</span> <span class="pre">150,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;map_threshold&quot;:</span> <span class="pre">0.037</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">}</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">],</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;overlay_root&quot;:</span> <span class="pre">&quot;local:///home/bob/copick_project_train/&quot;,</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;overlay_fs_args&quot;:</span> <span class="pre">{</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;auto_mkdir&quot;:</span> <span class="pre">true</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">},</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;dataset_ids&quot;</span> <span class="pre">:</span> <span class="pre">[10301]</span>&#160;&#160;&#160;&#160; <span class="pre">}</span>&#160;&#160;&#160;&#160; </code></p>
-<p>??? example “<code class="docutils literal notranslate"><span class="pre">config_evaluate.json</span></code>”
-<code class="docutils literal notranslate"><span class="pre">json</span>&#160;&#160;&#160;&#160; <span class="pre">{</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;config_type&quot;:</span> <span class="pre">&quot;cryoet_data_portal&quot;,</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;name&quot;:</span> <span class="pre">&quot;Sample</span> <span class="pre">Boundary</span> <span class="pre">Prediction</span> <span class="pre">-</span> <span class="pre">Evaluation</span> <span class="pre">Set&quot;,</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;description&quot;:</span> <span class="pre">&quot;This</span> <span class="pre">project</span> <span class="pre">uses</span> <span class="pre">datasets</span> <span class="pre">10301</span> <span class="pre">and</span> <span class="pre">10302</span> <span class="pre">from</span> <span class="pre">the</span> <span class="pre">CZ</span> <span class="pre">cryoET</span> <span class="pre">Data</span> <span class="pre">Portal</span> <span class="pre">for</span> <span class="pre">sample</span> <span class="pre">boundary</span> <span class="pre">prediction.&quot;,</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;version&quot;:</span> <span class="pre">&quot;0.5.4&quot;,</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;pickable_objects&quot;:</span> <span class="pre">[</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">{</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;name&quot;:</span> <span class="pre">&quot;top-layer&quot;,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;is_particle&quot;:</span> <span class="pre">true,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;label&quot;:</span> <span class="pre">100,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;color&quot;:</span> <span class="pre">[</span>&#160; <span class="pre">255,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">255],</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;radius&quot;:</span> <span class="pre">150,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;map_threshold&quot;:</span> <span class="pre">0.037</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">},</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">{</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;name&quot;:</span> <span class="pre">&quot;bottom-layer&quot;,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;is_particle&quot;:</span> <span class="pre">true,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;label&quot;:</span> <span class="pre">101,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;color&quot;:</span> <span class="pre">[</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">0,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">255,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">0,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">255</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">],</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;radius&quot;:</span> <span class="pre">150,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;map_threshold&quot;:</span> <span class="pre">0.037</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">},</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">{</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;name&quot;:</span> <span class="pre">&quot;sample&quot;,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;is_particle&quot;:</span> <span class="pre">false,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;label&quot;:</span> <span class="pre">102,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;color&quot;:</span> <span class="pre">[</span>&#160; <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">255,</span> <span class="pre">128],</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;radius&quot;:</span> <span class="pre">150,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;map_threshold&quot;:</span> <span class="pre">0.037</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">},</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">{</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;name&quot;:</span> <span class="pre">&quot;valid-area&quot;,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;is_particle&quot;:</span> <span class="pre">false,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;label&quot;:</span> <span class="pre">103,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;color&quot;:</span> <span class="pre">[</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">255,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">255,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">0,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">128</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">],</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;radius&quot;:</span> <span class="pre">150,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;map_threshold&quot;:</span> <span class="pre">0.037</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">},</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">{</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;name&quot;:</span> <span class="pre">&quot;valid-sample&quot;,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;is_particle&quot;:</span> <span class="pre">false,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;label&quot;:</span> <span class="pre">2,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;color&quot;:</span> <span class="pre">[</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">0,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">255,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">255,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">128</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">],</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;radius&quot;:</span> <span class="pre">150,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;map_threshold&quot;:</span> <span class="pre">0.037</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">}</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">],</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;overlay_root&quot;:</span> <span class="pre">&quot;local:///home/bob/copick_project_evaluate/&quot;,</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;overlay_fs_args&quot;:</span> <span class="pre">{</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;auto_mkdir&quot;:</span> <span class="pre">true</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">},</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">&quot;dataset_ids&quot;</span> <span class="pre">:</span> <span class="pre">[10301,</span> <span class="pre">10302]</span>&#160;&#160;&#160;&#160; <span class="pre">}</span>&#160;&#160;&#160;&#160; </code></p>
+<details>
+  <summary>config_train.json</summary>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;config_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cryoet_data_portal&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sample Boundary Prediction - Training Set&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This project uses dataset 10301 from the CZ cryoET Data Portal as a training set for sample boundary prediction.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.5.4&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pickable_objects&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;top-layer&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;is_particle&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">  </span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">],</span>
+<span class="w">              </span><span class="nt">&quot;radius&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;map_threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.037</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bottom-layer&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;is_particle&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">101</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">255</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">255</span>
+<span class="w">              </span><span class="p">],</span>
+<span class="w">              </span><span class="nt">&quot;radius&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;map_threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.037</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sample&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;is_particle&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">102</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">  </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">128</span><span class="p">],</span>
+<span class="w">              </span><span class="nt">&quot;radius&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;map_threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.037</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;valid-area&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;is_particle&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">103</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="mi">255</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">255</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">128</span>
+<span class="w">              </span><span class="p">],</span>
+<span class="w">              </span><span class="nt">&quot;radius&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;map_threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.037</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;valid-sample&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;is_particle&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">255</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">255</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">128</span>
+<span class="w">              </span><span class="p">],</span>
+<span class="w">              </span><span class="nt">&quot;radius&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;map_threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.037</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;overlay_root&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;local:///home/bob/copick_project_train/&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;overlay_fs_args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;auto_mkdir&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;dataset_ids&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">10301</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+</pre></div>
+</div>
+</details>
+<details>
+  <summary>config_evaluate.json</summary>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;config_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cryoet_data_portal&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sample Boundary Prediction - Evaluation Set&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This project uses datasets 10301 and 10302 from the CZ cryoET Data Portal for sample boundary prediction.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.5.4&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pickable_objects&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;top-layer&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;is_particle&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">  </span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">],</span>
+<span class="w">              </span><span class="nt">&quot;radius&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;map_threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.037</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bottom-layer&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;is_particle&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">101</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">255</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">255</span>
+<span class="w">              </span><span class="p">],</span>
+<span class="w">              </span><span class="nt">&quot;radius&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;map_threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.037</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sample&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;is_particle&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">102</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">  </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">128</span><span class="p">],</span>
+<span class="w">              </span><span class="nt">&quot;radius&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;map_threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.037</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;valid-area&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;is_particle&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">103</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="mi">255</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">255</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">128</span>
+<span class="w">              </span><span class="p">],</span>
+<span class="w">              </span><span class="nt">&quot;radius&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;map_threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.037</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;valid-sample&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;is_particle&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">255</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">255</span><span class="p">,</span>
+<span class="w">                  </span><span class="mi">128</span>
+<span class="w">              </span><span class="p">],</span>
+<span class="w">              </span><span class="nt">&quot;radius&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;map_threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.037</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;overlay_root&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;local:///home/bob/copick_project_evaluate/&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;overlay_fs_args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;auto_mkdir&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;dataset_ids&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">10301</span><span class="p">,</span><span class="w"> </span><span class="mi">10302</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+</pre></div>
+</div>
+</details>
 </section>
 <section id="step-2-annotate-the-training-set">
 <h2>Step 2: Annotate the training set<a class="headerlink" href="#step-2-annotate-the-training-set" title="Permalink to this heading">¶</a></h2>
@@ -367,10 +508,8 @@ album<span class="w"> </span>run<span class="w"> </span>copick:create_empty_pick
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">copick</span> <span class="n">start</span> <span class="n">config_train</span><span class="o">.</span><span class="n">json</span>
 </pre></div>
 </div>
-<figure markdown="span">
-  ![chimerax-interface](./figures/chimx_boundary.png){width="800"}
-  <figcaption>The ChimeraX-copick interface after loading run 14069.</figcaption>
-</figure>
+<p><img alt="chimerax-interface" src="_images/chimx_boundary.png" />
+<em>The ChimeraX-copick interface after loading run 14069.</em></p>
 <p>This will open a new window with the copick interface. On the top left side you will see the available objects, on the
 bottom left you can find a list of runs in the dataset. On the right side you can find the interface of ArtiaX (the
 plugin that allows you to annotate objects in ChimeraX).</p>
@@ -383,8 +522,9 @@ of the sample by placing points on the top-border of the sample.</p>
 <p>You can switch the slicing direction in the <code class="docutils literal notranslate"><span class="pre">Tomogram</span></code>-tab on the right. You can move through the 2D slices of the
 tomogram using the slider on the right or <code class="docutils literal notranslate"><span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">Mouse</span> <span class="pre">Wheel</span></code>. For more information on how to use the copick interface,
 see the info box below and refer to the <a class="reference external" href="https://www.cgl.ucsf.edu/chimerax/docs/user/index.html">ChimeraX documentation</a>.</p>
-<p>??? note “Keyboard Shortcuts”
-<strong>Particles</strong></p>
+<details>
+  <summary>Keyboard Shortcuts</summary>
+<p><strong>Particles</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- `--` Remove Particle.
 - `00` Set 0% transparency for active particle list.
 - `55` Set 50% transparency for active particle list.
@@ -394,16 +534,16 @@ see the info box below and refer to the <a class="reference external" href="http
 - `sa` Select all particles for active particle list.
 - `ss` Select particles mode
 - `ww` Hide/Show ArtiaX particle lists.
-
-**Picking**
-
-- `ap` Add on plane mode
+</pre></div>
+</div>
+<p><strong>Picking</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- `ap` Add on plane mode
 - `dp` Delete picked mode
 - `ds` Delete selected particles
-
-**Visualization**
-
-- `cc` Turn Clipping On/Off
+</pre></div>
+</div>
+<p><strong>Visualization</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- `cc` Turn Clipping On/Off
 - `ee` Switch to orthoplanes.
 - `ff` Move planes mouse mode.
 - `qq` Switch to single plane.
@@ -411,19 +551,17 @@ see the info box below and refer to the <a class="reference external" href="http
 - `xx` View XY orientation.
 - `yy` View YZ orientation.
 - `zz` View XZ orientation.
-
-**Info**
-
-- `?` Show Shortcuts in Log.
+</pre></div>
+</div>
+<p><strong>Info</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- `?` Show Shortcuts in Log.
 - `il` Toggle Info Label.
 </pre></div>
 </div>
+</details>    
 <p>At the end of this step, you should have annotated the top- and bottom-layer of the all 18 tomograms in the training set.</p>
-<figure markdown="span">
-  ![top-bottom](./figures/top_bottom_light.png#only-light)
-  ![top-bottom](./figures/top_bottom_dark.png#only-dark)
-  <figcaption>Points clicked along the top and bottom boundary of the sample of a tomogram.</figcaption>
-</figure>
+<p><img alt="top-bottom" src="_images/top_bottom_light.png" /></p>
+<p><em>Points clicked along the top and bottom boundary of the sample of a tomogram.</em></p>
 </section>
 <section id="step-3-create-the-training-data">
 <h2>Step 3: Create the training data<a class="headerlink" href="#step-3-create-the-training-data" title="Permalink to this heading">¶</a></h2>
@@ -447,12 +585,9 @@ tomogram.</p>
 </div>
 <p>You can now visualize the created bounding boxes in ChimeraX by restarting the copick interface and selecting the
 <code class="docutils literal notranslate"><span class="pre">valid-area</span></code> object in the Mesh-tab on the left side.</p>
-<figure markdown="span">
-  ![valid-area](./figures/valid_area_light.png#only-light)
-  ![valid-area](./figures/valid_area_dark.png#only-dark)
-  <figcaption>Top view onto a tomogram (<a href="https://cryoetdataportal.czscience.com/runs/14069">run 15094</a>) without (left)
-and with (right) valid reconstruction area mesh overlayed.</figcaption>
-</figure>
+<p><img alt="valid-area" src="_images/valid_area_light.png" /></p>
+<p><em>Top view onto a tomogram <a class="reference external" href="https://cryoetdataportal.czscience.com/runs/14069">run 15094</a> without (left)
+and with (right) valid reconstruction area mesh overlayed.</em></p>
 </section>
 <section id="sample">
 <h3>Sample<a class="headerlink" href="#sample" title="Permalink to this heading">¶</a></h3>
@@ -491,10 +626,8 @@ sample area. We do this using the <code class="docutils literal notranslate"><sp
 </div>
 <p>You can now visualize the final 3D mesh for training in ChimeraX by restarting the copick interface and selecting the
 <code class="docutils literal notranslate"><span class="pre">valid-area</span></code> object in the Mesh-tab on the left side.</p>
-<figure markdown="span">
-  ![mesh](./figures/mesh_fit.png){width="400"}
-  <figcaption>Side view of the tomogram with points and intersected, valid sample area.</figcaption>
-</figure>
+<p><img alt="mesh" src="_images/mesh_fit.png" />
+<em>Side view of the tomogram with points and intersected, valid sample area.</em></p>
 </section>
 <section id="training-data">
 <h3>Training data<a class="headerlink" href="#training-data" title="Permalink to this heading">¶</a></h3>
@@ -597,10 +730,8 @@ tomograms. We will use the <code class="docutils literal notranslate"><span clas
 <p>This will create a new segmentation volume with name <code class="docutils literal notranslate"><span class="pre">segmentation</span></code>, user <code class="docutils literal notranslate"><span class="pre">output</span></code> and session <code class="docutils literal notranslate"><span class="pre">0</span></code> for the tomograms
 <code class="docutils literal notranslate"><span class="pre">14114</span></code>, <code class="docutils literal notranslate"><span class="pre">14132</span></code>, <code class="docutils literal notranslate"><span class="pre">14137</span></code>, and <code class="docutils literal notranslate"><span class="pre">14163</span></code>. You can now visualize the segmentations in ChimeraX by restarting the copick interface
 and selecting the <code class="docutils literal notranslate"><span class="pre">segmentation</span></code> object in the <code class="docutils literal notranslate"><span class="pre">Segmentation</span></code>-tab on the top left part of the interface.</p>
-<figure markdown="span">
-  ![prediction-fit](./figures/prediction_fit.png){width="800"}
-  <figcaption>Segmentation generated by the model and box fit to the segmentation.</figcaption>
-</figure>
+<p><img alt="prediction-fit" src="_images/prediction_fit.png" /></p>
+<p><em>Segmentation generated by the model and box fit to the segmentation.</em></p>
 </section>
 <section id="step-6-post-processing">
 <h2>Step 6: Post-processing<a class="headerlink" href="#step-6-post-processing" title="Permalink to this heading">¶</a></h2>
@@ -625,13 +756,9 @@ parallel sides to the segmentation.</p>
 <p>You can now visualize the final 3D mesh for evaluation in ChimeraX by restarting the copick interface and selecting the
 <code class="docutils literal notranslate"><span class="pre">valid-sample</span></code> object in the <code class="docutils literal notranslate"><span class="pre">Mesh</span></code>-tab on the left side. Below you can see the final result for the three tomograms
 <code class="docutils literal notranslate"><span class="pre">14114</span></code>, <code class="docutils literal notranslate"><span class="pre">14132</span></code>, <code class="docutils literal notranslate"><span class="pre">14137</span></code>, and <code class="docutils literal notranslate"><span class="pre">14163</span></code>.</p>
-<figure markdown="span">
-  ![final-fit](./figures/final.png){width="800"}
-  <figcaption> Clipped boundaries predicted for <a href="https://cryoetdataportal.czscience.com/runs/14114">run 14114</a>,
-  <a href="https://cryoetdataportal.czscience.com/runs/14132">run 14132</a>,
-  <a href="https://cryoetdataportal.czscience.com/runs/14137">run 14137</a>, and
-  <a href="https://cryoetdataportal.czscience.com/runs/14163">run 14163</a> (left to right, top to bottom).</figcaption>
-</figure>
+<p><img alt="final-fit" src="_images/final.png" />
+<em>Clipped boundaries predicted for <a class="reference internal" href="#ttps://cryoetdataportal.czscience.com/runs/14114"><span class="xref myst">run 14114</span></a>, <a class="reference external" href="https://cryoetdataportal.czscience.com/runs/14132">run 14132</a>, <a class="reference external" href="https://cryoetdataportal.czscience.com/runs/14137">run 14137</a>, and
+<a class="reference external" href="https://cryoetdataportal.czscience.com/runs/14163">run 14163</a> (left to right, top to bottom).</em></p>
 </section>
 </section>
 
