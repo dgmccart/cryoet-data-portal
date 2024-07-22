@@ -252,8 +252,9 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data_of_interest</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">queries</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">get_by_id</span></code> method allows you to select data using the ID found on the Portal. For example, to select the data for <a class="reference external" href="https://cryoetdataportal.czscience.com/datasets/10005">Dataset 10005</a> on the Portal use this snippet:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">get_by_id</span></code> method allows you to select data using the ID found on the Portal. For example, to select the data for <a class="reference external" href="https://cryoetdataportal.czscience.com/datasets/10005">Dataset 10005</a> on the Portal and download it into your current directory use this snippet:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data_10005</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="mi">10005</span><span class="p">)</span>
+<span class="n">data_10005</span><span class="o">.</span><span class="n">download_everything</span><span class="p">()</span>
 </pre></div>
 </div>
 </section>
