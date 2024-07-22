@@ -46,9 +46,7 @@
 
     
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Examples" href="cryoet_data_portal_docsite_examples.html" />
-    <link rel="prev" title="napari" href="cryoet_data_portal_docsite_napari.html" /> 
+    <link rel="search" title="Search" href="search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -91,37 +89,12 @@
                 
                 
                 
-                <ul class="current">
+                <ul>
 <li class="toctree-l1"><a class="reference internal" href="cryoet_data_portal_docsite_quick_start.html">Quick start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python-api.html">Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cryoet_data_portal_docsite_data.html">Data Organization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cryoet_data_portal_docsite_napari.html">napari</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Predicting sample boundaries</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#step-0-environment-and-pre-requisites">Step 0: Environment and Pre-requisites</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#chimerax-and-chimerax-copick-for-visualization-and-annotation">1. ChimeraX and ChimeraX-copick (for visualization and annotation)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#album-and-copick-catalog-for-processing-steps">2. Album and copick-catalog (for processing steps)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#j-finder-for-segmentation">3. J-finder (for segmentation)</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#step-1-setup-your-copick-projects">Step 1: Setup your copick projects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-2-annotate-the-training-set">Step 2: Annotate the training set</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-3-create-the-training-data">Step 3: Create the training data</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#valid-reconstruction-area">Valid reconstruction area</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#sample">Sample</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#intersection">Intersection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#training-data">Training data</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#step-4-train-the-model">Step 4: Train the model</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#create-the-multilabel-segmentation">Create the multilabel segmentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#train-the-model">Train the model</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#step-5-evaluate-the-model">Step 5: Evaluate the model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-6-post-processing">Step 6: Post-processing</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="cryoet_data_portal_docsite_examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cryoet_data_portal_docsite_aws.html">Download Data using AWS CLI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cryoet_data_portal_docsite_faq.html">Frequently Asked Questions</a></li>
 </ul>
@@ -165,46 +138,35 @@
 <h1>Predicting sample boundaries<a class="headerlink" href="#predicting-sample-boundaries" title="Permalink to this heading">¶</a></h1>
 <p><img alt="tutorial-goal" src="_images/tomo_side_light.png" />
 <em>Side view onto a cryo-electron tomogram <a class="reference external" href="https://cryoetdataportal.czscience.com/runs/15094">run 15094</a> without (left) and with (right) sample boundary annotation</em></p>
-<p>Biological samples acquired in a cryoET experiment are usually thin slabs of vitrified ice containing the biological
-specimen of interest. Unfortunately, it is difficult to determine orientation and thickness of the samples ahead of
-reconstruction. For this reason, volumes reconstructed from cryoET tilt series are often larger than the actual sample
-and contain a significant amount of empty space (i.e. the vacuum inside the TEM column).</p>
-<p>There are several reasons for why it can be useful to determine more accurate sample boundaries, e.g.</p>
+<p>Biological samples acquired in a cryoET experiment are usually thin slabs of vitrified ice containing the biological specimen of interest. Unfortunately, it is difficult to determine orientation and thickness of the samples ahead of reconstruction. For this reason, volumes reconstructed from cryoET tilt series are often larger than the actual sample and contain a significant amount of empty space (i.e. the vacuum inside the TEM column).</p>
+<p>There are several reasons for why it can be useful to determine more accurate sample boundaries, for example:</p>
 <ul class="simple">
 <li><p>statistical analysis of the sample preparation process</p></li>
 <li><p>masking out the vacuum region to reduce the size of the volume</p></li>
 <li><p>masking out the vacuum region during the training of a neural network</p></li>
 <li><p>capping of membrane segmentations to define topological boundaries</p></li>
 </ul>
-<p>Below, we will show how to use <a class="reference external" href="https://github.com/copick/copick"><strong>copick</strong></a>, an adapted version of <a class="reference external" href="https://github.com/jtschwar/cryoet-deepfinder/tree/master">deepfinder</a>
-and <a class="reference external" href="https://album.solutions/">album</a> to predict sample boundaries for datasets <a class="reference external" href="https://cryoetdataportal.czscience.com/datasets/10301">10301</a>
-and <a class="reference external" href="https://cryoetdataportal.czscience.com/datasets/10302">10302</a> from the
-<a class="reference external" href="https://cryoetdataportal.czscience.com">CZ cryoET Data Portal</a>. Copick is a cross-platform, storage-agnostic and server-less dataset API for cryoET datasets.</p>
+<p>Below, we will show how to use <a class="reference external" href="https://github.com/copick/copick"><strong>copick</strong></a>, an adapted version of <a class="reference external" href="https://github.com/jtschwar/cryoet-deepfinder/tree/master">deepfinder</a> and <a class="reference external" href="https://album.solutions/">album</a> to predict sample boundaries for datasets <a class="reference external" href="https://cryoetdataportal.czscience.com/datasets/10301">10301</a> and <a class="reference external" href="https://cryoetdataportal.czscience.com/datasets/10302">10302</a> from the <a class="reference external" href="https://cryoetdataportal.czscience.com">CZ cryoET Data Portal</a>. Copick is a cross-platform, storage-agnostic and server-less dataset API for cryoET datasets.</p>
 <p><img alt="topview" src="_images/tomo_top_both.png" /></p>
 <p><em>Top view onto the same tomogram (<a class="reference external" href="https://cryoetdataportal.czscience.com/runs/15094">run 15094</a>) from dataset <a class="reference external" href="https://cryoetdataportal.czscience.com/datasets/10302">10302</a>.</em></p>
 <section id="step-0-environment-and-pre-requisites">
 <h2>Step 0: Environment and Pre-requisites<a class="headerlink" href="#step-0-environment-and-pre-requisites" title="Permalink to this heading">¶</a></h2>
-<p>For the purpose of this tutorial we will assume that we are working on a machine with access to an NVIDIA GPU and a
-working <code class="docutils literal notranslate"><span class="pre">CUDA</span> <span class="pre">12.3</span></code>/<code class="docutils literal notranslate"><span class="pre">CUDNN</span> <span class="pre">8.9</span></code> installation. Before we can start, we need to install the necessary software. We will
-use the following tools:</p>
+<p>For the purpose of this tutorial we will assume that we are working on a machine with access to an NVIDIA GPU and a working <code class="docutils literal notranslate"><span class="pre">CUDA</span> <span class="pre">12.3</span></code>/<code class="docutils literal notranslate"><span class="pre">CUDNN</span> <span class="pre">8.9</span></code> installation. Before we can start, we need to install the necessary software. We will use the following tools:</p>
 <section id="chimerax-and-chimerax-copick-for-visualization-and-annotation">
 <h3>1. ChimeraX and ChimeraX-copick (for visualization and annotation)<a class="headerlink" href="#chimerax-and-chimerax-copick-for-visualization-and-annotation" title="Permalink to this heading">¶</a></h3>
-<p>Download and install ChimeraX from <a class="reference external" href="https://www.cgl.ucsf.edu/chimerax/download.html">here</a>. After installing ChimeraX,
-install the ChimeraX-copick extension by running the following command in ChimeraX:</p>
+<p>Download and install ChimeraX from <a class="reference external" href="https://www.cgl.ucsf.edu/chimerax/download.html">here</a>. After installing ChimeraX, install the ChimeraX-copick extension by running the following command in ChimeraX:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">toolshed</span> <span class="n">install</span> <span class="n">copick</span>
 </pre></div>
 </div>
 </section>
 <section id="album-and-copick-catalog-for-processing-steps">
 <h3>2. Album and copick-catalog (for processing steps)<a class="headerlink" href="#album-and-copick-catalog-for-processing-steps" title="Permalink to this heading">¶</a></h3>
-<p>Comprehensive installation instructions for Album can be found on the <a class="reference external" href="https://docs.album.solutions/en/latest/installation-instructions.html">Album docs website</a>.</p>
-<p>TL;DR:</p>
+<p>Comprehensive installation instructions for Album can be found on the <a class="reference external" href="https://docs.album.solutions/en/latest/installation-instructions.html">Album docs website</a>, but in brief, to install Album use:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>album<span class="w"> </span>album<span class="w"> </span>-c<span class="w"> </span>conda-forge
 conda<span class="w"> </span>activate<span class="w"> </span>album
 </pre></div>
 </div>
-<p>Now, add copick’s Album catalog (<a class="reference external" href="https://github.com/copick/copick-catalog">copick-catalog</a>) to your album
-installation and install the requried solutions by running the following commands:</p>
+<p>Now, add copick’s Album catalog (<a class="reference external" href="https://github.com/copick/copick-catalog">copick-catalog</a>) to your album installation and install the requried solutions by running the following commands:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>album<span class="w"> </span>add-catalog<span class="w"> </span>git@github.com:copick/copick-catalog.git
 album<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>album<span class="w"> </span>upgrade
 album<span class="w"> </span>install<span class="w"> </span>copick:create_empty_picks:0.2.0
@@ -251,7 +213,7 @@ description, and copick-API version.</p>
 </pre></div>
 </div>
 </details>
-<p>Next, we define the objects that can be accessed and created using the copick API. In this case we will create 5 objects:</p>
+<p>Next, we define the objects that can be accessed and created using the copick API. In this case, we will create 5 objects:</p>
 <ul class="simple">
 <li><p>top-layer – the top layer of the sample</p></li>
 <li><p>bottom-layer – the bottom layer of the sample</p></li>
@@ -511,8 +473,7 @@ album<span class="w"> </span>run<span class="w"> </span>copick:create_empty_pick
 <p><img alt="chimerax-interface" src="_images/chimx_boundary.png" />
 <em>The ChimeraX-copick interface after loading run 14069.</em></p>
 <p>This will open a new window with the copick interface. On the top left side you will see the available objects, on the
-bottom left you can find a list of runs in the dataset. On the right side you can find the interface of ArtiaX (the
-plugin that allows you to annotate objects in ChimeraX).</p>
+bottom left you can find a list of runs in the dataset. On the right side you can find the interface of ArtiaX (the plugin that allows you to annotate objects in ChimeraX).</p>
 <p>Double-click a run’s directory (e.g. <code class="docutils literal notranslate"><span class="pre">14069</span></code>) in the run list to show the available resolutions, double-click the
 resolution’s directory (<code class="docutils literal notranslate"><span class="pre">VS:7.840</span></code>) to display the available tomograms. In order to load a tomogram, double-click the
 tomogram.</p>
@@ -558,7 +519,7 @@ see the info box below and refer to the <a class="reference external" href="http
 - `il` Toggle Info Label.
 </pre></div>
 </div>
-</details>    
+</details>
 <p>At the end of this step, you should have annotated the top- and bottom-layer of the all 18 tomograms in the training set.</p>
 <p><img alt="top-bottom" src="_images/top_bottom_light.png" /></p>
 <p><em>Points clicked along the top and bottom boundary of the sample of a tomogram.</em></p>
@@ -624,10 +585,9 @@ sample area. We do this using the <code class="docutils literal notranslate"><sp
 --output_session<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
 </pre></div>
 </div>
-<p>You can now visualize the final 3D mesh for training in ChimeraX by restarting the copick interface and selecting the
-<code class="docutils literal notranslate"><span class="pre">valid-area</span></code> object in the Mesh-tab on the left side.</p>
-<p><img alt="mesh" src="_images/mesh_fit.png" />
-<em>Side view of the tomogram with points and intersected, valid sample area.</em></p>
+<p>You can now visualize the final 3D mesh for training in ChimeraX by restarting the copick interface and selecting the <code class="docutils literal notranslate"><span class="pre">valid-area</span></code> object in the Mesh-tab on the left side.</p>
+<p><img alt="mesh" src="_images/mesh_fit.png" /></p>
+<p><em>Side view of the tomogram with points and intersected, valid sample area.</em></p>
 </section>
 <section id="training-data">
 <h3>Training data<a class="headerlink" href="#training-data" title="Permalink to this heading">¶</a></h3>
@@ -756,8 +716,8 @@ parallel sides to the segmentation.</p>
 <p>You can now visualize the final 3D mesh for evaluation in ChimeraX by restarting the copick interface and selecting the
 <code class="docutils literal notranslate"><span class="pre">valid-sample</span></code> object in the <code class="docutils literal notranslate"><span class="pre">Mesh</span></code>-tab on the left side. Below you can see the final result for the three tomograms
 <code class="docutils literal notranslate"><span class="pre">14114</span></code>, <code class="docutils literal notranslate"><span class="pre">14132</span></code>, <code class="docutils literal notranslate"><span class="pre">14137</span></code>, and <code class="docutils literal notranslate"><span class="pre">14163</span></code>.</p>
-<p><img alt="final-fit" src="_images/final.png" />
-<em>Clipped boundaries predicted for <a class="reference internal" href="#ttps://cryoetdataportal.czscience.com/runs/14114"><span class="xref myst">run 14114</span></a>, <a class="reference external" href="https://cryoetdataportal.czscience.com/runs/14132">run 14132</a>, <a class="reference external" href="https://cryoetdataportal.czscience.com/runs/14137">run 14137</a>, and
+<p><img alt="final-fit" src="_images/final.png" /></p>
+<p><em>Clipped boundaries predicted for <a class="reference internal" href="#ttps://cryoetdataportal.czscience.com/runs/14114"><span class="xref myst">run 14114</span></a>, <a class="reference external" href="https://cryoetdataportal.czscience.com/runs/14132">run 14132</a>, <a class="reference external" href="https://cryoetdataportal.czscience.com/runs/14137">run 14137</a>, and
 <a class="reference external" href="https://cryoetdataportal.czscience.com/runs/14163">run 14163</a> (left to right, top to bottom).</em></p>
 </section>
 </section>
@@ -766,10 +726,7 @@ parallel sides to the segmentation.</p>
             </div>
             
             </div>
-            <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="cryoet_data_portal_docsite_napari.html" class="btn btn-neutral float-left" title="napari" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="cryoet_data_portal_docsite_examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+            <footer>
 
   <hr/>
 
