@@ -207,10 +207,6 @@
 <td><p>Dataset.related_database_entries</p></td>
 <td><p>The dataset identifier for other databases, e.g. EMPIAR, that contain this dataset.</p></td>
 </tr>
-<tr class="row-even"><td><p>Citations</p></td>
-<td><p>Dataset.dataset_citations</p></td>
-<td><p>DOIs for publications that cite the dataset.</p></td>
-</tr>
 </tbody>
 </table>
 <p><strong>Sample and Experiment Conditions</strong></p>
@@ -352,6 +348,7 @@
 <section id="dataset-download-options">
 <h3>Dataset Download Options<a class="headerlink" href="#dataset-download-options" title="Permalink to this heading">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Dataset</span></code> button opens a dialog with instructions for downloading the dataset using <a class="reference internal" href="cryoet_data_portal_docsite_aws.html"><span class="std std-doc">Amazon Web Services Command Line Interface</span></a> or the <a class="reference internal" href="python-api.html"><span class="std std-doc">Portal API</span></a>. Datasets are downloaded as folders named the Dataset ID. The folder contains subfolders for each run named the author-chosen run name, a folder named Images which contains the key photos of the dataset displayed on the Portal, and a JSON file named <code class="docutils literal notranslate"><span class="pre">dataset_metadata.json</span></code> containing the dataset metadata. The run folders contain subfolders named Tomogram and TiltSeries, containing the tomogram and tilt series image files, and a JSON file named <code class="docutils literal notranslate"><span class="pre">run_metadata.json</span></code> containing the run metadata. More details on the run folder file structure is found in the documentation <a class="reference internal" href="#run-download-options"><span class="std std-ref">below</span></a>.</p>
+<p>The metadata schema of any JSON file stored with the data on the data portal’s S3 bucket is described in LinkML and can be found <a class="reference external" href="https://github.com/chanzuckerberg/cryoet-data-portal-backend/tree/main/schema/v1.1.0">here</a>.</p>
 </section>
 </section>
 <section id="runs">

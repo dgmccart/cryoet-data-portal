@@ -98,7 +98,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#install-in-a-virtual-environment">Install in a Virtual Environment</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#api-functions-overview">API Functions Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api-methods-overview">API Methods Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#browse-all-data-in-the-portal">Browse all data in the portal</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#find-all-datasets-containing-membrane-annotations">Find all datasets containing membrane annotations</a></li>
@@ -156,7 +156,7 @@
 <p><strong>Contents</strong></p>
 <ol class="arabic simple">
 <li><p><a class="reference internal" href="#installation"><span class="std std-ref">Installation</span></a></p></li>
-<li><p><a class="reference internal" href="#api-functions-overview"><span class="std std-ref">API Functions Overview</span></a></p></li>
+<li><p><a class="reference internal" href="#api-methods-overview"><span class="std std-ref">API Methods Overview</span></a></p></li>
 <li><p><a class="reference internal" href="#examples"><span class="std std-ref">Example Code Snippets</span></a></p></li>
 </ol>
 <section id="installation">
@@ -184,8 +184,8 @@
 </div>
 </section>
 </section>
-<section id="api-functions-overview">
-<h2>API Functions Overview<a class="headerlink" href="#api-functions-overview" title="Permalink to this heading">¶</a></h2>
+<section id="api-methods-overview">
+<h2>API Methods Overview<a class="headerlink" href="#api-methods-overview" title="Permalink to this heading">¶</a></h2>
 <p>The Portal API has methods for searching and downloading data. <strong>Every class</strong> has a <code class="docutils literal notranslate"><span class="pre">find</span></code> and <code class="docutils literal notranslate"><span class="pre">get_by_id</span></code> method for selecting data, and most classes have <code class="docutils literal notranslate"><span class="pre">download...</span></code> methods for downloading the data. Below is a table of the API classes download methods.</p>
 <table class="docutils align-default">
 <thead>
@@ -197,34 +197,34 @@
 <tr class="row-even"><td><p><a class="reference internal" href="python-api.html#dataset"><span class="std std-ref">Dataset</span></a></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">download_everything</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>DatasetAuthor</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="python-api.html#datasetauthor"><span class="std std-ref">DatasetAuthor</span></a></p></td>
 <td><p>Not applicable as this class doesn’t contain data files</p></td>
 </tr>
-<tr class="row-even"><td><p>DatasetFunding</p></td>
+<tr class="row-even"><td><p>DatasetFunding(./python-api.rst#datasetfunding)</p></td>
 <td><p>Not applicable as this class doesn’t contain data files</p></td>
 </tr>
-<tr class="row-odd"><td><p>Run</p></td>
+<tr class="row-odd"><td><p>Run(./python-api.rst#run)</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">download_everything</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p>TomogramVoxelSpacing</p></td>
+<tr class="row-even"><td><p>TomogramVoxelSpacing(./python-api.rst#tomogramvoxelspacing)</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">download_everything</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>Tomogram</p></td>
+<tr class="row-odd"><td><p>Tomogram(./python-api.rst#tomogram)</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">download_all_annotations</span></code>, <code class="docutils literal notranslate"><span class="pre">download_mrcfile</span></code>, <code class="docutils literal notranslate"><span class="pre">download_omezarr</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p>TomogramAuthor</p></td>
+<tr class="row-even"><td><p>TomogramAuthor(./python-api.rst#tomogramauthor)</p></td>
 <td><p>Not applicable as this class doesn’t contain data files</p></td>
 </tr>
-<tr class="row-odd"><td><p>Annotation</p></td>
+<tr class="row-odd"><td><p>Annotation(./python-api.rst#annotation)</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">download</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p>AnnotationFile</p></td>
+<tr class="row-even"><td><p>AnnotationFile(./python-api.rst#annotationfile)</p></td>
 <td><p>None, use the Annotation or Tomogram class to download annotations</p></td>
 </tr>
-<tr class="row-odd"><td><p>AnnoatationAuthor</p></td>
+<tr class="row-odd"><td><p>AnnoatationAuthor(./python-api.rst#annotationauthor)</p></td>
 <td><p>Not applicable as this class doesn’t contain data files</p></td>
 </tr>
-<tr class="row-even"><td><p>TiltSeries</p></td>
+<tr class="row-even"><td><p>TiltSeries(./python-api.rst#tiltseries)</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">download_alignment_file</span></code>, <code class="docutils literal notranslate"><span class="pre">download_angle_list</span></code>, <code class="docutils literal notranslate"><span class="pre">download_collection_metadata</span></code>, <code class="docutils literal notranslate"><span class="pre">download_mrcfile</span></code>, <code class="docutils literal notranslate"><span class="pre">download_omezarr</span></code></p></td>
 </tr>
 </tbody>
