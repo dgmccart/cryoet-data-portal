@@ -475,7 +475,7 @@
 <td><p>Description of additional processing used to derive the tomogram, e.g. denoised.</p></td>
 </tr>
 <tr class="row-even"><td><p>Smallest Available Voxel Spacing</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">tomo</span> <span class="pre">in</span> <span class="pre">Run.tomogram_voxel_spacings:</span> <span class="pre">tomo.voxel_spacing</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">min_vs</span> <span class="pre">=</span> <span class="pre">min([vs.voxel_spacing</span> <span class="pre">for</span> <span class="pre">vs</span> <span class="pre">in</span> <span class="pre">Run.tomogram_voxel_spacings])</span></code></p></td>
 <td><p>Smallest voxel spacing of the available tomograms.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Size (x, y, z)</p></td>
