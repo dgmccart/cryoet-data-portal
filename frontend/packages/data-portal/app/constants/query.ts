@@ -1,5 +1,6 @@
 export enum QueryParams {
   AnnotationId = 'annotation_id',
+  AnnotationsPage = 'annotations-page',
   AnnotationSoftware = 'annotation-software',
   AuthorName = 'author',
   AuthorOrcid = 'author_orcid',
@@ -26,8 +27,10 @@ export enum QueryParams {
   ReconstructionMethod = 'reconstruction_method',
   ReconstructionSoftware = 'reconstruction_software',
   Tab = 'tab',
+  TableTab = 'table-tab',
   TiltRangeMax = 'tilt_max',
   TiltRangeMin = 'tilt_min',
   TomogramProcessing = 'tomogram-processing',
   TomogramSampling = 'tomogram-sampling',
+  TomogramsPage = 'tomograms-page',
 }

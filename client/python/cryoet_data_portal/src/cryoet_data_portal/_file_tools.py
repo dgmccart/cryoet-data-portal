@@ -9,6 +9,8 @@ from botocore import UNSIGNED
 from botocore.client import Config
 from tqdm import tqdm
 
+from cryoet_data_portal._constants import USER_AGENT
+
 logger = logging.getLogger("cryoet-data-portal")
 
 
@@ -20,10 +22,13 @@ def get_anon_s3_client():
         return boto3.client(
             "s3",
             endpoint_url=boto_url,
-            config=Config(signature_version=signature_version),
+            config=Config(signature_version=signature_version, user_agent=USER_AGENT),
         )
 
-    return boto3.client("s3", config=Config(signature_version=UNSIGNED))
+    return boto3.client(
+        "s3",
+        config=Config(signature_version=UNSIGNED, user_agent=USER_AGENT),
+    )
 
 
 def parse_s3_url(url: str) -> (str, str):
@@ -37,7 +42,7 @@ def download_https(
     with_progress: bool = True,
 ):
     dest_path = get_destination_path(url, dest_path)
-    fetch_request = requests.get(url, stream=True)
+    fetch_request = requests.get(url, stream=True, headers={"User-agent": USER_AGENT})
     total_size = int(fetch_request.headers["content-length"])
     block_size = 1024 * 512
     logger.info("Downloading %s to %s", url, dest_path)
@@ -57,12 +62,23 @@ def get_destination_path(
     dest_path: Optional[str],
     recursive_from_prefix: Optional[str] = None,
 ) -> str:
+    """
+    Get the destination path for a file download.
+
+    Args:
+        url (str): The URL to download
+        dest_path (str): The destination path the files will download to
+        recursive_from_prefix (str): All files under this prefix in the url will be downloaded to a path dest_path.
+        E.g. if the URL is https://example.com/a/b/file.txt, and the recursive_from_prefix would be
+        https://example.com/, then the dest_path would be dest_path/a/b/file.txt.
+
+    Returns:
+        str: The destination path for the file download
+
+    """
     if not dest_path:
         dest_path = os.getcwd()
     dest_path = os.path.abspath(dest_path)
-
-    if not os.path.isdir(dest_path) and recursive_from_prefix:
-        raise ValueError("Recursive downloads require a base directory")
 
     # If we're downloading recursively, we need to add the dest URL
     # (minus the prefix) to the dest path.
@@ -71,7 +87,11 @@ def get_destination_path(
     path_suffix = url[len(recursive_from_prefix) :]
     dest_path = os.path.join(dest_path, os.path.dirname(path_suffix))
     if not os.path.isdir(dest_path):
-        os.makedirs(dest_path, exist_ok=True)
+        try:
+            os.makedirs(dest_path, exist_ok=True)
+        except Exception as e:
+            raise ValueError(f"Unable to create the path {dest_path}") from e
+
     dest_path = os.path.join(dest_path, os.path.basename(path_suffix))
     return dest_path
 
